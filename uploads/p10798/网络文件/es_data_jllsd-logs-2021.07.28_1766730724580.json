@@ -1,0 +1,5702 @@
+[
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-forecast-knn:v1543",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-95"
+      },
+      "pod": {
+        "uid": "975ba581-e6d1-45fc-8cdb-d3994a785425",
+        "name": "test-jllsd-forecast-knn-548c97cb8d-g47xz"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-forecast-knn-548c97cb8d"
+      },
+      "labels": {
+        "app": "forecast-knn",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "548c97cb8d",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-95",
+      "name": "ubuntu-1604-95",
+      "id": "d0912959-99d8-4132-ac37-4e1467c02f97",
+      "ephemeral_id": "adce503e-79d2-4ac5-af31-02ba9df66e7d",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.001Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-forecast-knn-548c97cb8d-g47xz_default_app-ef337ff6afff1de93973403c2351fd1287df4eaf8e17eacd3a6edaf1fa41c447.log"
+      },
+      "offset": 996472
+    },
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-95"
+    },
+    "_id": "_MZp6noB1OunSDOXRWJl",
+    "message": "2021-07-28 08:00:00.000  INFO 1 --- [   scheduling-1] n.c.j.f.knn.cache.KnnLoadDataCache       : 开始执行定时任务-------------------------------------------------------------------    2021-07-28T08:00",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-data-center-es:v1376",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-94"
+      },
+      "pod": {
+        "uid": "3e826ade-0591-4821-a968-175e192f31e6",
+        "name": "test-jllsd-data-center-es-5498dc54b-tbrnw"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-data-center-es-5498dc54b"
+      },
+      "labels": {
+        "app": "data-center-es",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "5498dc54b",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-94",
+      "name": "ubuntu-1604-94",
+      "id": "d3948fe8-2732-4888-9c35-cead47811073",
+      "ephemeral_id": "1aee4f4c-58f4-4c91-a418-c752cd02b1bf",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.001Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-data-center-es-5498dc54b-tbrnw_default_app-960fc922f268a6e37f689d8609c6cd70d84d9df3137b5e97f60f8b98154e47d0.log"
+      },
+      "offset": 3575623
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-94"
+    },
+    "_id": "7sZp6noB1OunSDOXRGLB",
+    "message": "2021-07-28 08:00:00.000  INFO 1 --- [0880-thread-198] n.c.j.j.service.impl.EsQueryServiceImpl  : queryDirectionAggData, request is [TunnelTimeRangeQueryRemoteRequest(intervalType=FIXED_INTERVAL, interval=5m, includeBeginTime=2021-07-28T00:00, excludeEndTime=2021-07-28T23:59:59.999999999)]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.003Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62958284
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "dcZp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.001  INFO 1 --- [   scheduling-1] n.c.j.j.task.MockDataTask                : do mock at [2021-07-28T08:00:00.001]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-auth-center:v2098",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-95"
+      },
+      "pod": {
+        "uid": "72337ee8-40da-4d71-9577-f512af1a17dd",
+        "name": "test-jllsd-auth-center-8567db5ffd-kv2wj"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-auth-center-8567db5ffd"
+      },
+      "labels": {
+        "app": "auth-center",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "8567db5ffd",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-95",
+      "name": "ubuntu-1604-95",
+      "id": "d0912959-99d8-4132-ac37-4e1467c02f97",
+      "ephemeral_id": "adce503e-79d2-4ac5-af31-02ba9df66e7d",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.004Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-auth-center-8567db5ffd-kv2wj_default_app-432cb97dc836f2a929078c5728e4d3bdaf361f63fbc41370e54d8ae5826372cc.log"
+      },
+      "offset": 102861
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-95"
+    },
+    "_id": "ncZp6noB1OunSDOXR3Go",
+    "message": "2021-07-28 08:00:00.000  INFO 1 --- [   scheduling-1] n.c.j.authcenter.auth.SessionManager     : clean invalid session start...",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.008Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62958748
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "eMZp6noB1OunSDOXTISX",
+    "message": "2021-07-28 08:00:00.008  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C001] success, partition [2], offset [23525133]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.008Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62958488
+    },
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "OMZp6noB1OunSDOXTISW",
+    "message": "2021-07-28 08:00:00.007  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C001] success, partition [2], offset [23525132]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.008Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62960308
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "t8Zp6noB1OunSDOXTISY",
+    "message": "2021-07-28 08:00:00.008  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C001] success, partition [2], offset [23525139]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.008Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62959008
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "ssZp6noB1OunSDOXTIWb",
+    "message": "2021-07-28 08:00:00.008  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C001] success, partition [2], offset [23525134]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.008Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62960568
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "c8Zp6noB1OunSDOXTIWa",
+    "message": "2021-07-28 08:00:00.008  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C002] success, partition [0], offset [22767316]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.008Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62959268
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "8cZp6noB1OunSDOXTIWb",
+    "message": "2021-07-28 08:00:00.008  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C001] success, partition [2], offset [23525135]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.008Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62959788
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "NMZp6noB1OunSDOXTIWa",
+    "message": "2021-07-28 08:00:00.008  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C001] success, partition [2], offset [23525137]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.008Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62960048
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "b8Zp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.008  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C001] success, partition [2], offset [23525138]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.008Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62959528
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "-cZp6noB1OunSDOXTIOU",
+    "message": "2021-07-28 08:00:00.008  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C001] success, partition [2], offset [23525136]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.009Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62960828
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "zsZp6noB1OunSDOXTISY",
+    "message": "2021-07-28 08:00:00.008  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C002] success, partition [0], offset [22767317]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.009Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62962908
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "s8Zp6noB1OunSDOXTIWb",
+    "message": "2021-07-28 08:00:00.009  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C002] success, partition [0], offset [22767325]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.009Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62961348
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "AMZp6noB1OunSDOXTIOQ",
+    "message": "2021-07-28 08:00:00.008  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C002] success, partition [0], offset [22767319]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.009Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62962648
+    },
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "ecZp6noB1OunSDOXTISX",
+    "message": "2021-07-28 08:00:00.009  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C002] success, partition [0], offset [22767324]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.009Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62961088
+    },
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "fsZp6noB1OunSDOXTIOU",
+    "message": "2021-07-28 08:00:00.008  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C002] success, partition [0], offset [22767318]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.009Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62961868
+    },
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "P8Zp6noB1OunSDOXTIOS",
+    "message": "2021-07-28 08:00:00.008  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C002] success, partition [0], offset [22767321]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.009Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62962388
+    },
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "OcZp6noB1OunSDOXTISW",
+    "message": "2021-07-28 08:00:00.009  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C002] success, partition [0], offset [22767323]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.009Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62962128
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "eMZp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.009  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C002] success, partition [0], offset [22767322]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.009Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62961608
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "KcZp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.008  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C002] success, partition [0], offset [22767320]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-data-center-es:v1376",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-94"
+      },
+      "pod": {
+        "uid": "3e826ade-0591-4821-a968-175e192f31e6",
+        "name": "test-jllsd-data-center-es-5498dc54b-tbrnw"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-data-center-es-5498dc54b"
+      },
+      "labels": {
+        "app": "data-center-es",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "5498dc54b",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-94",
+      "name": "ubuntu-1604-94",
+      "id": "d3948fe8-2732-4888-9c35-cead47811073",
+      "ephemeral_id": "1aee4f4c-58f4-4c91-a418-c752cd02b1bf",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.011Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-data-center-es-5498dc54b-tbrnw_default_app-960fc922f268a6e37f689d8609c6cd70d84d9df3137b5e97f60f8b98154e47d0.log"
+      },
+      "offset": 3575983
+    },
+    "host": {
+      "name": "ubuntu-1604-94"
+    },
+    "@version": "1",
+    "_id": "6sZp6noB1OunSDOXRGK-",
+    "message": "2021-07-28 08:00:00.010  INFO 1 --- [0880-thread-198] n.c.j.j.service.impl.EsQueryServiceImpl  : convertToTunnelDirectionAggCameraDataDto: [terms_direction], [date_histogram_beginEventTime], [sum_flow], [avg_speed], [avg_tpi]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-data-center-es:v1376",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-94"
+      },
+      "pod": {
+        "uid": "3e826ade-0591-4821-a968-175e192f31e6",
+        "name": "test-jllsd-data-center-es-5498dc54b-tbrnw"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-data-center-es-5498dc54b"
+      },
+      "labels": {
+        "app": "data-center-es",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "5498dc54b",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-94",
+      "name": "ubuntu-1604-94",
+      "id": "d3948fe8-2732-4888-9c35-cead47811073",
+      "ephemeral_id": "1aee4f4c-58f4-4c91-a418-c752cd02b1bf",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.019Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-data-center-es-5498dc54b-tbrnw_default_app-960fc922f268a6e37f689d8609c6cd70d84d9df3137b5e97f60f8b98154e47d0.log"
+      },
+      "offset": 3576279
+    },
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-94"
+    },
+    "_id": "7cZp6noB1OunSDOXRGLA",
+    "message": "2021-07-28 08:00:00.018  INFO 1 --- [0880-thread-198] n.c.j.j.service.impl.EsQueryServiceImpl  : queryDirectionAggData, request is [TunnelTimeRangeQueryRemoteRequest(intervalType=FIXED_INTERVAL, interval=5m, includeBeginTime=2021-07-27T23:55, excludeEndTime=2021-07-28T08:00)]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.025Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62963688
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "NcZp6noB1OunSDOXTIWa",
+    "message": "2021-07-28 08:00:00.025  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C001] success, partition [2], offset [23525142]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.025Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62963428
+    },
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "-sZp6noB1OunSDOXTIOU",
+    "message": "2021-07-28 08:00:00.025  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C001] success, partition [2], offset [23525141]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.025Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62963168
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "8sZp6noB1OunSDOXTIWb",
+    "message": "2021-07-28 08:00:00.025  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C001] success, partition [2], offset [23525140]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-auth-center:v2098",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-95"
+      },
+      "pod": {
+        "uid": "72337ee8-40da-4d71-9577-f512af1a17dd",
+        "name": "test-jllsd-auth-center-8567db5ffd-kv2wj"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-auth-center-8567db5ffd"
+      },
+      "labels": {
+        "app": "auth-center",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "8567db5ffd",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-95",
+      "name": "ubuntu-1604-95",
+      "id": "d0912959-99d8-4132-ac37-4e1467c02f97",
+      "ephemeral_id": "adce503e-79d2-4ac5-af31-02ba9df66e7d",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-auth-center-8567db5ffd-kv2wj_default_app-432cb97dc836f2a929078c5728e4d3bdaf361f63fbc41370e54d8ae5826372cc.log"
+      },
+      "offset": 103059
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-95"
+    },
+    "_id": "oMZp6noB1OunSDOXR3Go",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [   scheduling-1] n.c.j.authcenter.auth.SessionManager     : total session count: [66], clean invalid session count: [0]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62968108
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "ucZp6noB1OunSDOXTISY",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C004] success, partition [2], offset [23525159]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62968368
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "dcZp6noB1OunSDOXTIWa",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C004] success, partition [2], offset [23525160]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62965248
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "AcZp6noB1OunSDOXTIOQ",
+    "message": "2021-07-28 08:00:00.025  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C003] success, partition [2], offset [23525148]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62969148
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "AsZp6noB1OunSDOXTIOQ",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C004] success, partition [2], offset [23525163]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62965768
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "QMZp6noB1OunSDOXTIOS",
+    "message": "2021-07-28 08:00:00.025  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C003] success, partition [2], offset [23525150]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62968888
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "gMZp6noB1OunSDOXTIOU",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C004] success, partition [2], offset [23525162]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62967068
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "88Zp6noB1OunSDOXTIWb",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C004] success, partition [2], offset [23525155]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62967328
+    },
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "-8Zp6noB1OunSDOXTIOU",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C004] success, partition [2], offset [23525156]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62964988
+    },
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "f8Zp6noB1OunSDOXTIOU",
+    "message": "2021-07-28 08:00:00.025  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C003] success, partition [2], offset [23525147]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62967588
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "NsZp6noB1OunSDOXTIWa",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C004] success, partition [2], offset [23525157]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62964468
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "dMZp6noB1OunSDOXTIWa",
+    "message": "2021-07-28 08:00:00.025  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C003] success, partition [2], offset [23525145]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62966808
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "tMZp6noB1OunSDOXTIWb",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C004] success, partition [2], offset [23525154]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62967848
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "ccZp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C004] success, partition [2], offset [23525158]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62966028
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "esZp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C003] success, partition [2], offset [23525151]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62966548
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "esZp6noB1OunSDOXTISX",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C003] success, partition [2], offset [23525153]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62966288
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "OsZp6noB1OunSDOXTISW",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C003] success, partition [2], offset [23525152]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62964728
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "0MZp6noB1OunSDOXTISY",
+    "message": "2021-07-28 08:00:00.025  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C003] success, partition [2], offset [23525146]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62964208
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "uMZp6noB1OunSDOXTISY",
+    "message": "2021-07-28 08:00:00.025  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C003] success, partition [2], offset [23525144]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62968628
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "0sZp6noB1OunSDOXTISY",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C004] success, partition [2], offset [23525161]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62965508
+    },
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "K8Zp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.025  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C003] success, partition [2], offset [23525149]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.026Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62963948
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "cMZp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.025  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C003] success, partition [2], offset [23525143]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.027Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62969668
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "QcZp6noB1OunSDOXTIOS",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C005] success, partition [2], offset [23525165]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-data-center-es:v1376",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-94"
+      },
+      "pod": {
+        "uid": "3e826ade-0591-4821-a968-175e192f31e6",
+        "name": "test-jllsd-data-center-es-5498dc54b-tbrnw"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-data-center-es-5498dc54b"
+      },
+      "labels": {
+        "app": "data-center-es",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "5498dc54b",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-94",
+      "name": "ubuntu-1604-94",
+      "id": "d3948fe8-2732-4888-9c35-cead47811073",
+      "ephemeral_id": "1aee4f4c-58f4-4c91-a418-c752cd02b1bf",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.027Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-data-center-es-5498dc54b-tbrnw_default_app-960fc922f268a6e37f689d8609c6cd70d84d9df3137b5e97f60f8b98154e47d0.log"
+      },
+      "offset": 3576625
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-94"
+    },
+    "_id": "78Zp6noB1OunSDOXRGLD",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [0880-thread-198] n.c.j.j.service.impl.EsQueryServiceImpl  : convertToTunnelDirectionAggCameraDataDto: [terms_direction], [date_histogram_beginEventTime], [sum_flow], [avg_speed], [avg_tpi]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.027Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62970188
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "O8Zp6noB1OunSDOXTISW",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C005] success, partition [2], offset [23525167]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.027Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62969408
+    },
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "LcZp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C004] success, partition [2], offset [23525164]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.027Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62969928
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "fMZp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C005] success, partition [2], offset [23525166]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.032Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62970448
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "e8Zp6noB1OunSDOXTISX",
+    "message": "2021-07-28 08:00:00.026  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C005] success, partition [2], offset [23525168]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.038Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62970708
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "tcZp6noB1OunSDOXTIWb",
+    "message": "2021-07-28 08:00:00.034  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C005] success, partition [2], offset [23525169]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.039Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62971228
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "_MZp6noB1OunSDOXTIOU",
+    "message": "2021-07-28 08:00:00.038  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C006] success, partition [1], offset [23526977]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.039Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62972528
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "t8Zp6noB1OunSDOXTIOU",
+    "message": "2021-07-28 08:00:00.039  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C006] success, partition [1], offset [23526982]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.039Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62973048
+    },
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "A8Zp6noB1OunSDOXTIOQ",
+    "message": "2021-07-28 08:00:00.039  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C006] success, partition [1], offset [23526984]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.039Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62971748
+    },
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "csZp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.039  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C006] success, partition [1], offset [23526979]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.039Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62972788
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "gcZp6noB1OunSDOXTIOU",
+    "message": "2021-07-28 08:00:00.039  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C006] success, partition [1], offset [23526983]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.039Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62970968
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "9MZp6noB1OunSDOXTIWb",
+    "message": "2021-07-28 08:00:00.038  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C005] success, partition [2], offset [23525170]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.039Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62973308
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "L8Zp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.039  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C006] success, partition [1], offset [23526985]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.039Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62972268
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "dsZp6noB1OunSDOXTIWa",
+    "message": "2021-07-28 08:00:00.039  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C006] success, partition [1], offset [23526981]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.039Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62972008
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "usZp6noB1OunSDOXTISY",
+    "message": "2021-07-28 08:00:00.039  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C006] success, partition [1], offset [23526980]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.039Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62971488
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "N8Zp6noB1OunSDOXTIWa",
+    "message": "2021-07-28 08:00:00.038  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C006] success, partition [1], offset [23526978]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.040Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62975646
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "c8Zp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C010] success, partition [0], offset [22767328]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.040Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62974867
+    },
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "9cZp6noB1OunSDOXTIWb",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C005] success, partition [2], offset [23525176]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.040Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62974348
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "fMZp6noB1OunSDOXTISX",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C005] success, partition [2], offset [23525174]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.040Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62975906
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "u8Zp6noB1OunSDOXTISY",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C010] success, partition [0], offset [22767329]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.040Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62975387
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "OMZp6noB1OunSDOXTIWa",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C010] success, partition [0], offset [22767327]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.040Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62973568
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "QsZp6noB1OunSDOXTIOS",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C005] success, partition [2], offset [23525171]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.040Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62975127
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "_cZp6noB1OunSDOXTIOU",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C010] success, partition [0], offset [22767326]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.040Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62974088
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "PMZp6noB1OunSDOXTISW",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C005] success, partition [2], offset [23525173]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.040Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62974607
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "tsZp6noB1OunSDOXTIWb",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C005] success, partition [2], offset [23525175]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.040Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62973828
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "fsZp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C005] success, partition [2], offset [23525172]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.041Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62978506
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "fcZp6noB1OunSDOXTISX",
+    "message": "2021-07-28 08:00:00.041  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C007] success, partition [1], offset [23526992]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.041Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62977206
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "BMZp6noB1OunSDOXTIOQ",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C006] success, partition [1], offset [23526987]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.041Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62977726
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "Q8Zp6noB1OunSDOXTIOS",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C007] success, partition [1], offset [23526989]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.041Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62976426
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "usZp6noB1OunSDOXTIOU",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C010] success, partition [0], offset [22767331]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.041Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62976946
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "gsZp6noB1OunSDOXTIOU",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C006] success, partition [1], offset [23526986]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.041Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62978246
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "PcZp6noB1OunSDOXTISW",
+    "message": "2021-07-28 08:00:00.041  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C007] success, partition [1], offset [23526991]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.041Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62976686
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "1MZp6noB1OunSDOXTISY",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C010] success, partition [0], offset [22767332]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-forecast-knn:v1543",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-95"
+      },
+      "pod": {
+        "uid": "975ba581-e6d1-45fc-8cdb-d3994a785425",
+        "name": "test-jllsd-forecast-knn-548c97cb8d-g47xz"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-forecast-knn-548c97cb8d"
+      },
+      "labels": {
+        "app": "forecast-knn",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "548c97cb8d",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-95",
+      "name": "ubuntu-1604-95",
+      "id": "d0912959-99d8-4132-ac37-4e1467c02f97",
+      "ephemeral_id": "adce503e-79d2-4ac5-af31-02ba9df66e7d",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.041Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-forecast-knn-548c97cb8d-g47xz_default_app-ef337ff6afff1de93973403c2351fd1287df4eaf8e17eacd3a6edaf1fa41c447.log"
+      },
+      "offset": 996751
+    },
+    "host": {
+      "name": "ubuntu-1604-95"
+    },
+    "@version": "1",
+    "_id": "_sZp6noB1OunSDOXRWJl",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [   scheduling-1] j.f.k.s.KnnForecastTrafficFlowCacheAbstr : 临近值:   {2021-06-30=141, 2021-06-29=135, 2021-06-28=244, 2021-06-27=241, 2021-06-26=244, 2021-06-25=242, 2021-06-24=561, 2021-06-23=561, 2021-06-22=240, 2021-06-21=240, 2021-06-20=242, 2021-06-19=241, 2021-06-18=241, 2021-06-17=240, 2021-06-16=239, 2021-06-15=486, 2021-06-14=442, 2021-06-13=476, 2021-06-12=484, 2021-06-11=504, 2021-06-10=561, 2021-07-27=137, 2021-07-26=141, 2021-07-25=140, 2021-07-24=137, 2021-07-23=139, 2021-07-22=139, 2021-07-21=138, 2021-07-20=137, 2021-07-19=136, 2021-07-18=138, 2021-07-17=139, 2021-07-16=135, 2021-07-15=139, 2021-07-14=138, 2021-07-13=144, 2021-07-12=142, 2021-07-11=143, 2021-07-10=139, 2021-07-09=137, 2021-07-08=139, 2021-07-07=139, 2021-07-06=137, 2021-07-05=142, 2021-07-04=138, 2021-07-03=138, 2021-07-02=136, 2021-07-01=142}",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-forecast-knn:v1543",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-95"
+      },
+      "pod": {
+        "uid": "975ba581-e6d1-45fc-8cdb-d3994a785425",
+        "name": "test-jllsd-forecast-knn-548c97cb8d-g47xz"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-forecast-knn-548c97cb8d"
+      },
+      "labels": {
+        "app": "forecast-knn",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "548c97cb8d",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-95",
+      "name": "ubuntu-1604-95",
+      "id": "d0912959-99d8-4132-ac37-4e1467c02f97",
+      "ephemeral_id": "adce503e-79d2-4ac5-af31-02ba9df66e7d",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.041Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-forecast-knn-548c97cb8d-g47xz_default_app-ef337ff6afff1de93973403c2351fd1287df4eaf8e17eacd3a6edaf1fa41c447.log"
+      },
+      "offset": 997700
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-95"
+    },
+    "_id": "-MZp6noB1OunSDOXRWJl",
+    "message": "2021-07-28 08:00:00.041  INFO 1 --- [   scheduling-1] j.f.k.s.KnnForecastTrafficFlowCacheAbstr : K临近值排序:   {2021-07-16=135, 2021-06-29=135, 2021-07-19=136}",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.041Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62979546
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "OcZp6noB1OunSDOXTIWa",
+    "message": "2021-07-28 08:00:00.041  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C007] success, partition [1], offset [23526996]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.041Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62978766
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "t8Zp6noB1OunSDOXTIWb",
+    "message": "2021-07-28 08:00:00.041  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C007] success, partition [1], offset [23526993]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.041Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62976166
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "d8Zp6noB1OunSDOXTIWa",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C010] success, partition [0], offset [22767330]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.041Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62980066
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "vMZp6noB1OunSDOXTISY",
+    "message": "2021-07-28 08:00:00.041  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C008] success, partition [2], offset [23525177]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.041Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62977466
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "MsZp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C007] success, partition [1], offset [23526988]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.041Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62979806
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "dMZp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.041  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C007] success, partition [1], offset [23526997]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.041Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62977986
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "gMZp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.040  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C007] success, partition [1], offset [23526990]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.041Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62979026
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "9sZp6noB1OunSDOXTIWb",
+    "message": "2021-07-28 08:00:00.041  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C007] success, partition [1], offset [23526994]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.041Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62979286
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "_sZp6noB1OunSDOXTIOU",
+    "message": "2021-07-28 08:00:00.041  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C007] success, partition [1], offset [23526995]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.042Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62982666
+    },
+    "stream": "stdout",
+    "@version": "1",
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "_id": "fsZp6noB1OunSDOXTISX",
+    "message": "2021-07-28 08:00:00.041  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C010] success, partition [0], offset [22767335]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.042Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62986826
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "f8Zp6noB1OunSDOXTISX",
+    "message": "2021-07-28 08:00:00.042  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C019] success, partition [0], offset [22767351]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.042Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62989426
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "hcZp6noB1OunSDOXTIOU",
+    "message": "2021-07-28 08:00:00.042  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C023] success, partition [0], offset [22767361]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.042Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62985006
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "2MZp6noB1OunSDOXTISY",
+    "message": "2021-07-28 08:00:00.042  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C017] success, partition [0], offset [22767344]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.042Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62982146
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "g8Zp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.041  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C010] success, partition [0], offset [22767333]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  },
+  {
+    "kubernetes": {
+      "container": {
+        "image": "registry.lisong.pub:28500/jllsd/jllsd-mock-camera-data:v680",
+        "name": "app"
+      },
+      "node": {
+        "name": "ubuntu-1604-92"
+      },
+      "pod": {
+        "uid": "3139206a-555f-4ee2-b63c-8f1cc87e3423",
+        "name": "test-jllsd-mock-camera-data-79f74d9c45-dsgm7"
+      },
+      "namespace": "default",
+      "replicaset": {
+        "name": "test-jllsd-mock-camera-data-79f74d9c45"
+      },
+      "labels": {
+        "app": "mock-camera-data",
+        "environment": "test",
+        "tier": "backend",
+        "pod-template-hash": "79f74d9c45",
+        "project": "jllsd"
+      }
+    },
+    "input": {
+      "type": "container"
+    },
+    "agent": {
+      "hostname": "ubuntu-1604-92",
+      "name": "ubuntu-1604-92",
+      "id": "0a7ad61f-9d96-492e-87d7-85a92cabebda",
+      "ephemeral_id": "8c24ba12-4163-4ce4-a255-ad11c17d67f9",
+      "type": "filebeat",
+      "version": "7.9.0"
+    },
+    "@timestamp": "2021-07-28T00:00:00.042Z",
+    "ecs": {
+      "version": "1.5.0"
+    },
+    "stream": "stdout",
+    "log": {
+      "file": {
+        "path": "/var/log/containers/test-jllsd-mock-camera-data-79f74d9c45-dsgm7_default_app-05f9b2642dd16df948c9c1e9b7af0ed2c07d3c0c6a06e3eff700604c412d84f4.log"
+      },
+      "offset": 62988126
+    },
+    "host": {
+      "name": "ubuntu-1604-92"
+    },
+    "@version": "1",
+    "_id": "d8Zp6noB1OunSDOXTIab",
+    "message": "2021-07-28 08:00:00.042  INFO 1 --- [ad | producer-1] n.c.j.j.service.impl.KafKaServiceImpl    : send to [jllsd-mock-camera-data-all-in-one] [C019] success, partition [0], offset [22767356]",
+    "tags": [
+      "beats_input_codec_plain_applied"
+    ]
+  }
+]

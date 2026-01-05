@@ -19,6 +19,7 @@ export const translations = {
             download: "Download",
             upload: "Upload",
             create: "Create",
+            edit: "Edit",
             optional: "Optional"
         },
         stats: {
@@ -82,7 +83,7 @@ export const translations = {
         },
         resources: {
             columns: {
-                name: "Resource Name",
+                name: "Resource Tag",
                 type: "Type",
                 fileName: "File Name",
                 stock: "Stock",
@@ -98,7 +99,7 @@ export const translations = {
                 dragHint: "Support for .ovpn, .xml, .yaml, .json, .crt, .key files",
                 folderLabel: "Target Folder",
                 folderPlace: "Select folder...",
-                nameLabel: "Resource Display Name",
+                nameLabel: "Resource Tag",
                 namePlace: "e.g., Production Admin VPN",
                 typeLabel: "Resource Type",
                 qtyLabel: "Availability",
@@ -108,7 +109,9 @@ export const translations = {
                 techDescPlace: "Optional notes for other engineers...",
                 submit: "Publish & Upload Resource",
                 errorNoFile: "Please select at least one file to upload.",
-                success: "Resource \"{name}\" uploaded successfully"
+                success: "Resource \"{name}\" uploaded successfully",
+                editTitle: "Edit Resource Properties",
+                editSuccess: "Resource updated successfully"
             }
         },
         claims: {
@@ -161,6 +164,7 @@ export const translations = {
             download: "下载",
             upload: "上传",
             create: "创建",
+            edit: "编辑",
             optional: "选填"
         },
         stats: {
@@ -224,7 +228,7 @@ export const translations = {
         },
         resources: {
             columns: {
-                name: "资源名称",
+                name: "资源标签",
                 type: "类型",
                 fileName: "文件名",
                 stock: "库存",
@@ -240,7 +244,7 @@ export const translations = {
                 dragHint: "支持 .ovpn, .xml, .yaml, .json, .crt, .key 等格式文件",
                 folderLabel: "目标文件夹",
                 folderPlace: "选择文件夹...",
-                nameLabel: "资源显示名称",
+                nameLabel: "资源标签",
                 namePlace: "例如：生产环境 Admin VPN",
                 typeLabel: "资源类型",
                 qtyLabel: "可用数量",
@@ -250,7 +254,9 @@ export const translations = {
                 techDescPlace: "给其他工程师的备注（选填）...",
                 submit: "发布并上传资源",
                 errorNoFile: "请至少选择一个要上传的文件。",
-                success: "资源 \"{name}\" 上传成功"
+                success: "资源 \"{name}\" 上传成功",
+                editTitle: "编辑资源属性",
+                editSuccess: "资源属性更新成功"
             }
         },
         claims: {

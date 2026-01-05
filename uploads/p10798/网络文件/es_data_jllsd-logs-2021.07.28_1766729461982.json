@@ -1,0 +1,802 @@
+[
+  {
+    "_id": "doc_0",
+    "@timestamp": "2025-12-26T06:10:54.108Z",
+    "message": "Auto-generated mock message 0 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_0",
+    "latency": 374
+  },
+  {
+    "_id": "doc_1",
+    "@timestamp": "2025-12-26T06:09:54.108Z",
+    "message": "Auto-generated mock message 1 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_1",
+    "latency": 258
+  },
+  {
+    "_id": "doc_2",
+    "@timestamp": "2025-12-26T06:08:54.108Z",
+    "message": "Auto-generated mock message 2 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_2",
+    "latency": 362
+  },
+  {
+    "_id": "doc_3",
+    "@timestamp": "2025-12-26T06:07:54.108Z",
+    "message": "Auto-generated mock message 3 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_3",
+    "latency": 69
+  },
+  {
+    "_id": "doc_4",
+    "@timestamp": "2025-12-26T06:06:54.108Z",
+    "message": "Auto-generated mock message 4 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_4",
+    "latency": 288
+  },
+  {
+    "_id": "doc_5",
+    "@timestamp": "2025-12-26T06:05:54.108Z",
+    "message": "Auto-generated mock message 5 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_5",
+    "latency": 401
+  },
+  {
+    "_id": "doc_6",
+    "@timestamp": "2025-12-26T06:04:54.108Z",
+    "message": "Auto-generated mock message 6 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_6",
+    "latency": 88
+  },
+  {
+    "_id": "doc_7",
+    "@timestamp": "2025-12-26T06:03:54.108Z",
+    "message": "Auto-generated mock message 7 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_7",
+    "latency": 157
+  },
+  {
+    "_id": "doc_8",
+    "@timestamp": "2025-12-26T06:02:54.108Z",
+    "message": "Auto-generated mock message 8 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_8",
+    "latency": 151
+  },
+  {
+    "_id": "doc_9",
+    "@timestamp": "2025-12-26T06:01:54.108Z",
+    "message": "Auto-generated mock message 9 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_9",
+    "latency": 50
+  },
+  {
+    "_id": "doc_10",
+    "@timestamp": "2025-12-26T06:00:54.108Z",
+    "message": "Auto-generated mock message 10 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_0",
+    "latency": 331
+  },
+  {
+    "_id": "doc_11",
+    "@timestamp": "2025-12-26T05:59:54.108Z",
+    "message": "Auto-generated mock message 11 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_1",
+    "latency": 250
+  },
+  {
+    "_id": "doc_12",
+    "@timestamp": "2025-12-26T05:58:54.108Z",
+    "message": "Auto-generated mock message 12 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_2",
+    "latency": 452
+  },
+  {
+    "_id": "doc_13",
+    "@timestamp": "2025-12-26T05:57:54.108Z",
+    "message": "Auto-generated mock message 13 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_3",
+    "latency": 261
+  },
+  {
+    "_id": "doc_14",
+    "@timestamp": "2025-12-26T05:56:54.108Z",
+    "message": "Auto-generated mock message 14 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_4",
+    "latency": 73
+  },
+  {
+    "_id": "doc_15",
+    "@timestamp": "2025-12-26T05:55:54.108Z",
+    "message": "Auto-generated mock message 15 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_5",
+    "latency": 425
+  },
+  {
+    "_id": "doc_16",
+    "@timestamp": "2025-12-26T05:54:54.108Z",
+    "message": "Auto-generated mock message 16 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_6",
+    "latency": 351
+  },
+  {
+    "_id": "doc_17",
+    "@timestamp": "2025-12-26T05:53:54.108Z",
+    "message": "Auto-generated mock message 17 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_7",
+    "latency": 313
+  },
+  {
+    "_id": "doc_18",
+    "@timestamp": "2025-12-26T05:52:54.108Z",
+    "message": "Auto-generated mock message 18 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_8",
+    "latency": 270
+  },
+  {
+    "_id": "doc_19",
+    "@timestamp": "2025-12-26T05:51:54.108Z",
+    "message": "Auto-generated mock message 19 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_9",
+    "latency": 483
+  },
+  {
+    "_id": "doc_20",
+    "@timestamp": "2025-12-26T05:50:54.108Z",
+    "message": "Auto-generated mock message 20 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_0",
+    "latency": 212
+  },
+  {
+    "_id": "doc_21",
+    "@timestamp": "2025-12-26T05:49:54.108Z",
+    "message": "Auto-generated mock message 21 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_1",
+    "latency": 488
+  },
+  {
+    "_id": "doc_22",
+    "@timestamp": "2025-12-26T05:48:54.108Z",
+    "message": "Auto-generated mock message 22 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_2",
+    "latency": 469
+  },
+  {
+    "_id": "doc_23",
+    "@timestamp": "2025-12-26T05:47:54.108Z",
+    "message": "Auto-generated mock message 23 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_3",
+    "latency": 164
+  },
+  {
+    "_id": "doc_24",
+    "@timestamp": "2025-12-26T05:46:54.108Z",
+    "message": "Auto-generated mock message 24 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_4",
+    "latency": 186
+  },
+  {
+    "_id": "doc_25",
+    "@timestamp": "2025-12-26T05:45:54.108Z",
+    "message": "Auto-generated mock message 25 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_5",
+    "latency": 404
+  },
+  {
+    "_id": "doc_26",
+    "@timestamp": "2025-12-26T05:44:54.108Z",
+    "message": "Auto-generated mock message 26 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_6",
+    "latency": 153
+  },
+  {
+    "_id": "doc_27",
+    "@timestamp": "2025-12-26T05:43:54.108Z",
+    "message": "Auto-generated mock message 27 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_7",
+    "latency": 335
+  },
+  {
+    "_id": "doc_28",
+    "@timestamp": "2025-12-26T05:42:54.108Z",
+    "message": "Auto-generated mock message 28 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_8",
+    "latency": 251
+  },
+  {
+    "_id": "doc_29",
+    "@timestamp": "2025-12-26T05:41:54.108Z",
+    "message": "Auto-generated mock message 29 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_9",
+    "latency": 17
+  },
+  {
+    "_id": "doc_30",
+    "@timestamp": "2025-12-26T05:40:54.108Z",
+    "message": "Auto-generated mock message 30 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_0",
+    "latency": 222
+  },
+  {
+    "_id": "doc_31",
+    "@timestamp": "2025-12-26T05:39:54.108Z",
+    "message": "Auto-generated mock message 31 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_1",
+    "latency": 180
+  },
+  {
+    "_id": "doc_32",
+    "@timestamp": "2025-12-26T05:38:54.108Z",
+    "message": "Auto-generated mock message 32 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_2",
+    "latency": 308
+  },
+  {
+    "_id": "doc_33",
+    "@timestamp": "2025-12-26T05:37:54.108Z",
+    "message": "Auto-generated mock message 33 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_3",
+    "latency": 475
+  },
+  {
+    "_id": "doc_34",
+    "@timestamp": "2025-12-26T05:36:54.108Z",
+    "message": "Auto-generated mock message 34 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_4",
+    "latency": 479
+  },
+  {
+    "_id": "doc_35",
+    "@timestamp": "2025-12-26T05:35:54.108Z",
+    "message": "Auto-generated mock message 35 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_5",
+    "latency": 341
+  },
+  {
+    "_id": "doc_36",
+    "@timestamp": "2025-12-26T05:34:54.108Z",
+    "message": "Auto-generated mock message 36 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_6",
+    "latency": 166
+  },
+  {
+    "_id": "doc_37",
+    "@timestamp": "2025-12-26T05:33:54.108Z",
+    "message": "Auto-generated mock message 37 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_7",
+    "latency": 462
+  },
+  {
+    "_id": "doc_38",
+    "@timestamp": "2025-12-26T05:32:54.108Z",
+    "message": "Auto-generated mock message 38 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_8",
+    "latency": 458
+  },
+  {
+    "_id": "doc_39",
+    "@timestamp": "2025-12-26T05:31:54.108Z",
+    "message": "Auto-generated mock message 39 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_9",
+    "latency": 98
+  },
+  {
+    "_id": "doc_40",
+    "@timestamp": "2025-12-26T05:30:54.108Z",
+    "message": "Auto-generated mock message 40 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_0",
+    "latency": 349
+  },
+  {
+    "_id": "doc_41",
+    "@timestamp": "2025-12-26T05:29:54.108Z",
+    "message": "Auto-generated mock message 41 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_1",
+    "latency": 281
+  },
+  {
+    "_id": "doc_42",
+    "@timestamp": "2025-12-26T05:28:54.108Z",
+    "message": "Auto-generated mock message 42 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_2",
+    "latency": 472
+  },
+  {
+    "_id": "doc_43",
+    "@timestamp": "2025-12-26T05:27:54.108Z",
+    "message": "Auto-generated mock message 43 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_3",
+    "latency": 262
+  },
+  {
+    "_id": "doc_44",
+    "@timestamp": "2025-12-26T05:26:54.108Z",
+    "message": "Auto-generated mock message 44 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_4",
+    "latency": 189
+  },
+  {
+    "_id": "doc_45",
+    "@timestamp": "2025-12-26T05:25:54.108Z",
+    "message": "Auto-generated mock message 45 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_5",
+    "latency": 455
+  },
+  {
+    "_id": "doc_46",
+    "@timestamp": "2025-12-26T05:24:54.108Z",
+    "message": "Auto-generated mock message 46 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_6",
+    "latency": 96
+  },
+  {
+    "_id": "doc_47",
+    "@timestamp": "2025-12-26T05:23:54.108Z",
+    "message": "Auto-generated mock message 47 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_7",
+    "latency": 289
+  },
+  {
+    "_id": "doc_48",
+    "@timestamp": "2025-12-26T05:22:54.108Z",
+    "message": "Auto-generated mock message 48 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_8",
+    "latency": 326
+  },
+  {
+    "_id": "doc_49",
+    "@timestamp": "2025-12-26T05:21:54.108Z",
+    "message": "Auto-generated mock message 49 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_9",
+    "latency": 334
+  },
+  {
+    "_id": "doc_50",
+    "@timestamp": "2025-12-26T05:20:54.108Z",
+    "message": "Auto-generated mock message 50 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_0",
+    "latency": 376
+  },
+  {
+    "_id": "doc_51",
+    "@timestamp": "2025-12-26T05:19:54.108Z",
+    "message": "Auto-generated mock message 51 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_1",
+    "latency": 373
+  },
+  {
+    "_id": "doc_52",
+    "@timestamp": "2025-12-26T05:18:54.108Z",
+    "message": "Auto-generated mock message 52 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_2",
+    "latency": 20
+  },
+  {
+    "_id": "doc_53",
+    "@timestamp": "2025-12-26T05:17:54.108Z",
+    "message": "Auto-generated mock message 53 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_3",
+    "latency": 364
+  },
+  {
+    "_id": "doc_54",
+    "@timestamp": "2025-12-26T05:16:54.108Z",
+    "message": "Auto-generated mock message 54 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_4",
+    "latency": 160
+  },
+  {
+    "_id": "doc_55",
+    "@timestamp": "2025-12-26T05:15:54.108Z",
+    "message": "Auto-generated mock message 55 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_5",
+    "latency": 29
+  },
+  {
+    "_id": "doc_56",
+    "@timestamp": "2025-12-26T05:14:54.108Z",
+    "message": "Auto-generated mock message 56 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_6",
+    "latency": 315
+  },
+  {
+    "_id": "doc_57",
+    "@timestamp": "2025-12-26T05:13:54.108Z",
+    "message": "Auto-generated mock message 57 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_7",
+    "latency": 487
+  },
+  {
+    "_id": "doc_58",
+    "@timestamp": "2025-12-26T05:12:54.108Z",
+    "message": "Auto-generated mock message 58 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_8",
+    "latency": 182
+  },
+  {
+    "_id": "doc_59",
+    "@timestamp": "2025-12-26T05:11:54.108Z",
+    "message": "Auto-generated mock message 59 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_9",
+    "latency": 394
+  },
+  {
+    "_id": "doc_60",
+    "@timestamp": "2025-12-26T05:10:54.108Z",
+    "message": "Auto-generated mock message 60 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_0",
+    "latency": 247
+  },
+  {
+    "_id": "doc_61",
+    "@timestamp": "2025-12-26T05:09:54.108Z",
+    "message": "Auto-generated mock message 61 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_1",
+    "latency": 376
+  },
+  {
+    "_id": "doc_62",
+    "@timestamp": "2025-12-26T05:08:54.108Z",
+    "message": "Auto-generated mock message 62 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_2",
+    "latency": 105
+  },
+  {
+    "_id": "doc_63",
+    "@timestamp": "2025-12-26T05:07:54.108Z",
+    "message": "Auto-generated mock message 63 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_3",
+    "latency": 156
+  },
+  {
+    "_id": "doc_64",
+    "@timestamp": "2025-12-26T05:06:54.108Z",
+    "message": "Auto-generated mock message 64 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_4",
+    "latency": 356
+  },
+  {
+    "_id": "doc_65",
+    "@timestamp": "2025-12-26T05:05:54.108Z",
+    "message": "Auto-generated mock message 65 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_5",
+    "latency": 280
+  },
+  {
+    "_id": "doc_66",
+    "@timestamp": "2025-12-26T05:04:54.108Z",
+    "message": "Auto-generated mock message 66 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_6",
+    "latency": 363
+  },
+  {
+    "_id": "doc_67",
+    "@timestamp": "2025-12-26T05:03:54.108Z",
+    "message": "Auto-generated mock message 67 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_7",
+    "latency": 131
+  },
+  {
+    "_id": "doc_68",
+    "@timestamp": "2025-12-26T05:02:54.108Z",
+    "message": "Auto-generated mock message 68 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_8",
+    "latency": 293
+  },
+  {
+    "_id": "doc_69",
+    "@timestamp": "2025-12-26T05:01:54.108Z",
+    "message": "Auto-generated mock message 69 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_9",
+    "latency": 478
+  },
+  {
+    "_id": "doc_70",
+    "@timestamp": "2025-12-26T05:00:54.108Z",
+    "message": "Auto-generated mock message 70 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_0",
+    "latency": 167
+  },
+  {
+    "_id": "doc_71",
+    "@timestamp": "2025-12-26T04:59:54.108Z",
+    "message": "Auto-generated mock message 71 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_1",
+    "latency": 139
+  },
+  {
+    "_id": "doc_72",
+    "@timestamp": "2025-12-26T04:58:54.108Z",
+    "message": "Auto-generated mock message 72 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_2",
+    "latency": 414
+  },
+  {
+    "_id": "doc_73",
+    "@timestamp": "2025-12-26T04:57:54.108Z",
+    "message": "Auto-generated mock message 73 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_3",
+    "latency": 152
+  },
+  {
+    "_id": "doc_74",
+    "@timestamp": "2025-12-26T04:56:54.108Z",
+    "message": "Auto-generated mock message 74 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_4",
+    "latency": 448
+  },
+  {
+    "_id": "doc_75",
+    "@timestamp": "2025-12-26T04:55:54.108Z",
+    "message": "Auto-generated mock message 75 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_5",
+    "latency": 289
+  },
+  {
+    "_id": "doc_76",
+    "@timestamp": "2025-12-26T04:54:54.108Z",
+    "message": "Auto-generated mock message 76 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_6",
+    "latency": 175
+  },
+  {
+    "_id": "doc_77",
+    "@timestamp": "2025-12-26T04:53:54.108Z",
+    "message": "Auto-generated mock message 77 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_7",
+    "latency": 228
+  },
+  {
+    "_id": "doc_78",
+    "@timestamp": "2025-12-26T04:52:54.108Z",
+    "message": "Auto-generated mock message 78 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_8",
+    "latency": 176
+  },
+  {
+    "_id": "doc_79",
+    "@timestamp": "2025-12-26T04:51:54.108Z",
+    "message": "Auto-generated mock message 79 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_9",
+    "latency": 191
+  },
+  {
+    "_id": "doc_80",
+    "@timestamp": "2025-12-26T04:50:54.108Z",
+    "message": "Auto-generated mock message 80 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_0",
+    "latency": 393
+  },
+  {
+    "_id": "doc_81",
+    "@timestamp": "2025-12-26T04:49:54.108Z",
+    "message": "Auto-generated mock message 81 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_1",
+    "latency": 287
+  },
+  {
+    "_id": "doc_82",
+    "@timestamp": "2025-12-26T04:48:54.108Z",
+    "message": "Auto-generated mock message 82 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_2",
+    "latency": 78
+  },
+  {
+    "_id": "doc_83",
+    "@timestamp": "2025-12-26T04:47:54.108Z",
+    "message": "Auto-generated mock message 83 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_3",
+    "latency": 51
+  },
+  {
+    "_id": "doc_84",
+    "@timestamp": "2025-12-26T04:46:54.108Z",
+    "message": "Auto-generated mock message 84 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_4",
+    "latency": 441
+  },
+  {
+    "_id": "doc_85",
+    "@timestamp": "2025-12-26T04:45:54.108Z",
+    "message": "Auto-generated mock message 85 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_5",
+    "latency": 381
+  },
+  {
+    "_id": "doc_86",
+    "@timestamp": "2025-12-26T04:44:54.108Z",
+    "message": "Auto-generated mock message 86 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_6",
+    "latency": 303
+  },
+  {
+    "_id": "doc_87",
+    "@timestamp": "2025-12-26T04:43:54.108Z",
+    "message": "Auto-generated mock message 87 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_7",
+    "latency": 5
+  },
+  {
+    "_id": "doc_88",
+    "@timestamp": "2025-12-26T04:42:54.108Z",
+    "message": "Auto-generated mock message 88 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_8",
+    "latency": 75
+  },
+  {
+    "_id": "doc_89",
+    "@timestamp": "2025-12-26T04:41:54.108Z",
+    "message": "Auto-generated mock message 89 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_9",
+    "latency": 170
+  },
+  {
+    "_id": "doc_90",
+    "@timestamp": "2025-12-26T04:40:54.108Z",
+    "message": "Auto-generated mock message 90 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_0",
+    "latency": 450
+  },
+  {
+    "_id": "doc_91",
+    "@timestamp": "2025-12-26T04:39:54.108Z",
+    "message": "Auto-generated mock message 91 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_1",
+    "latency": 97
+  },
+  {
+    "_id": "doc_92",
+    "@timestamp": "2025-12-26T04:38:54.108Z",
+    "message": "Auto-generated mock message 92 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_2",
+    "latency": 370
+  },
+  {
+    "_id": "doc_93",
+    "@timestamp": "2025-12-26T04:37:54.108Z",
+    "message": "Auto-generated mock message 93 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_3",
+    "latency": 92
+  },
+  {
+    "_id": "doc_94",
+    "@timestamp": "2025-12-26T04:36:54.108Z",
+    "message": "Auto-generated mock message 94 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_4",
+    "latency": 140
+  },
+  {
+    "_id": "doc_95",
+    "@timestamp": "2025-12-26T04:35:54.108Z",
+    "message": "Auto-generated mock message 95 for index jllsd-logs-2021.07.28",
+    "level": "error",
+    "user": "user_5",
+    "latency": 100
+  },
+  {
+    "_id": "doc_96",
+    "@timestamp": "2025-12-26T04:34:54.108Z",
+    "message": "Auto-generated mock message 96 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_6",
+    "latency": 421
+  },
+  {
+    "_id": "doc_97",
+    "@timestamp": "2025-12-26T04:33:54.108Z",
+    "message": "Auto-generated mock message 97 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_7",
+    "latency": 497
+  },
+  {
+    "_id": "doc_98",
+    "@timestamp": "2025-12-26T04:32:54.108Z",
+    "message": "Auto-generated mock message 98 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_8",
+    "latency": 329
+  },
+  {
+    "_id": "doc_99",
+    "@timestamp": "2025-12-26T04:31:54.108Z",
+    "message": "Auto-generated mock message 99 for index jllsd-logs-2021.07.28",
+    "level": "info",
+    "user": "user_9",
+    "latency": 328
+  }
+]

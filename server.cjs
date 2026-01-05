@@ -72,7 +72,7 @@ const server = http.createServer((req, res) => {
     }
     // --- DOWNLOAD / DELETE FILE ---
     else if (req.url.startsWith('/api/files/') && (req.method === 'GET' || req.method === 'DELETE')) {
-        const pathParts = req.url.split('/api/files/')[1].split('/');
+        const pathParts = req.url.split('/api/files/')[1].split('/').map(decodeURIComponent);
         const filePath = path.join(UPLOADS_DIR, ...pathParts);
         const filename = pathParts[pathParts.length - 1];
 
@@ -99,7 +99,7 @@ const server = http.createServer((req, res) => {
     }
     // --- DELETE FOLDER ---
     else if (req.url.startsWith('/api/folders/') && req.method === 'DELETE') {
-        const pathParts = req.url.split('/api/folders/')[1].split('/');
+        const pathParts = req.url.split('/api/folders/')[1].split('/').map(decodeURIComponent);
         const folderPath = path.join(UPLOADS_DIR, ...pathParts);
 
         if (fs.existsSync(folderPath)) {
@@ -113,7 +113,7 @@ const server = http.createServer((req, res) => {
     }
     // --- DELETE PROJECT ---
     else if (req.url.startsWith('/api/projects/') && req.method === 'DELETE') {
-        const projectId = req.url.split('/api/projects/')[1];
+        const projectId = decodeURIComponent(req.url.split('/api/projects/')[1]);
         const projectPath = path.join(UPLOADS_DIR, projectId);
 
         if (fs.existsSync(projectPath)) {

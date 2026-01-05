@@ -49,7 +49,8 @@ import {
   UploadOutlined,
   LineChartOutlined,
   FolderAddOutlined,
-  DeleteOutlined
+  DeleteOutlined,
+  EditOutlined
 } from '@ant-design/icons';
 import {
   BarChart,
@@ -113,6 +114,7 @@ export default function App() {
   const [selectedFolderName, setSelectedFolderName] = useState<string | null>(null);
 
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
+  const [inlineEditingId, setInlineEditingId] = useState<string | null>(null);
 
   const [aiLoading, setAiLoading] = useState(false);
   const [aiResponse, setAiResponse] = useState<string | null>(null);
@@ -122,6 +124,7 @@ export default function App() {
   const [isClaimOpen, setIsClaimOpen] = useState(false);
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
   const [isFolderModalOpen, setIsFolderModalOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
 
   const [selectedResource, setSelectedResource] = useState<Resource | null>(null);
   const [uploadFileList, setUploadFileList] = useState<any[]>([]);
@@ -130,6 +133,7 @@ export default function App() {
   const [claimForm] = Form.useForm();
   const [projectForm] = Form.useForm();
   const [folderForm] = Form.useForm();
+  const [editForm] = Form.useForm();
 
   const stats = useMemo(() => ({
     totalProjects: projects.length,
@@ -173,7 +177,10 @@ export default function App() {
 
     // Download from physical storage server (Hierarchical path)
     const a = document.createElement('a');
-    a.href = `http://localhost:3001/api/files/${selectedResource.projectId}/${selectedResource.folderName}/${selectedResource.fileName}`;
+    const encodedPid = encodeURIComponent(selectedResource.projectId);
+    const encodedFid = encodeURIComponent(selectedResource.folderName);
+    const encodedFname = encodeURIComponent(selectedResource.fileName);
+    a.href = `http://localhost:3001/api/files/${encodedPid}/${encodedFid}/${encodedFname}`;
     a.download = selectedResource.fileName;
     document.body.appendChild(a);
     a.click();
@@ -196,66 +203,100 @@ export default function App() {
       return;
     }
 
-    const file = uploadFileList[0].originFileObj;
-    const formData = new FormData();
-    formData.append('file', file);
+    const isBatch = uploadFileList.length > 1;
+    const hide = message.loading(isBatch ? 'Batch uploading files...' : 'Uploading file...', 0);
 
     try {
-      // 1. Upload to physical storage server
-      const uploadRes = await fetch('http://localhost:3001/api/upload', {
-        method: 'POST',
-        headers: {
-          'x-project-id': encodeURIComponent(selectedProjectId),
-          'x-folder-name': encodeURIComponent(values.folderName),
-        },
-        body: formData,
-      });
+      const results = await Promise.all(uploadFileList.map(async (fileItem) => {
+        const file = fileItem.originFileObj;
+        const formData = new FormData();
+        formData.append('file', file);
 
-      if (!uploadRes.ok) {
-        const errorText = await uploadRes.text();
-        throw new Error(errorText || 'Server Error');
-      }
+        // 1. Upload to physical storage server
+        const uploadRes = await fetch('http://localhost:3001/api/upload', {
+          method: 'POST',
+          headers: {
+            'x-project-id': encodeURIComponent(selectedProjectId),
+            'x-folder-name': encodeURIComponent(values.folderName),
+          },
+          body: formData,
+        });
 
-      const uploadData = await uploadRes.json();
-      if (!uploadData.success) throw new Error('Upload failed');
+        if (!uploadRes.ok) throw new Error(`Upload failed for ${file.name}`);
 
-      // 2. Read file content for preview & metadata
-      const content = await new Promise<string>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = (e) => resolve(e.target?.result as string);
-        reader.onerror = (e) => reject(new Error('Failed to read file'));
-        reader.readAsText(file);
-      });
+        // 2. Read file content
+        const content = await new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = (e) => resolve(e.target?.result as string);
+          reader.onerror = () => reject(new Error('Read failed'));
+          reader.readAsText(file);
+        });
 
-      // 3. Persist to IndexedDB
-      const newResource: Resource = {
-        id: Math.random().toString(36).substr(2, 9),
-        projectId: selectedProjectId,
-        folderName: values.folderName,
-        name: values.name || file.name,
-        type: values.type,
-        description: values.description || `Uploaded file: ${file.name}`,
-        totalQuantity: values.quantity,
-        availableQuantity: values.quantity,
-        maxClaimsPerUser: values.limit || 0,
-        fileName: file.name,
-        fileSize: file.size,
-        fileContent: content,
-        createdAt: new Date().toISOString().split('T')[0]
-      };
+        // 3. Prepare Metadata
+        const newResource: Resource = {
+          id: Math.random().toString(36).substr(2, 9),
+          projectId: selectedProjectId,
+          folderName: values.folderName,
+          name: isBatch ? file.name : (values.name || file.name),
+          type: values.type,
+          description: values.description || '',
+          totalQuantity: values.quantity,
+          availableQuantity: values.quantity,
+          maxClaimsPerUser: values.limit || 0,
+          fileName: file.name,
+          fileSize: file.size,
+          fileContent: content,
+          createdAt: new Date().toISOString().split('T')[0]
+        };
 
-      await StorageService.add(StorageService.STORES.RESOURCES, newResource);
+        await StorageService.add(StorageService.STORES.RESOURCES, newResource);
+        return newResource;
+      }));
 
-      setResources(prev => [...prev, newResource]);
-      message.success(t.resources.modals.success.replace('{name}', newResource.name));
+      setResources(prev => [...prev, ...results]);
+      message.success(isBatch ? `Successfully uploaded ${results.length} files` : t.resources.modals.success.replace('{name}', results[0].name));
       setIsUploadOpen(false);
       setUploadFileList([]);
       uploadForm.resetFields();
     } catch (err: any) {
-      console.error('Upload Error:', err);
-      message.error(`${t.resources.modals.error}: ${err.message || 'Unknown Error'}`);
+      console.error('Batch Upload Error:', err);
+      message.error(`Upload Error: ${err.message}`);
+    } finally {
+      hide();
     }
   }, [selectedProjectId, uploadForm, uploadFileList, t]);
+
+  const handleEditSubmit = useCallback(async (values: any) => {
+    if (!selectedResource) return;
+
+    const updatedResource = {
+      ...selectedResource,
+      name: values.name || selectedResource.fileName,
+      type: values.type,
+      description: values.description,
+      totalQuantity: values.quantity,
+      availableQuantity: values.quantity - (selectedResource.totalQuantity - selectedResource.availableQuantity),
+      maxClaimsPerUser: values.limit || 0
+    };
+
+    await StorageService.update(StorageService.STORES.RESOURCES, updatedResource);
+    setResources(prev => prev.map(r => r.id === updatedResource.id ? updatedResource : r));
+    message.success(t.resources.modals.editSuccess);
+    setIsEditOpen(false);
+    setSelectedResource(null);
+    editForm.resetFields();
+  }, [selectedResource, editForm, t]);
+
+  const handleUpdateDescription = useCallback(async (resourceId: string, newDesc: string) => {
+    const resource = resources.find(r => r.id === resourceId);
+    if (!resource) return;
+
+    const updatedResource = { ...resource, description: newDesc };
+    await StorageService.update(StorageService.STORES.RESOURCES, updatedResource);
+    setResources(prev => prev.map(r => r.id === resourceId ? updatedResource : r));
+    setInlineEditingId(null);
+    message.success(t.resources.modals.editSuccess);
+  }, [resources, t]);
 
   const handleCreateProject = useCallback(async (values: any) => {
     const newProject: Project = {
@@ -291,7 +332,10 @@ export default function App() {
     const resToDelete = resources.find(r => r.id === resourceId);
     if (resToDelete) {
       try {
-        await fetch(`http://localhost:3001/api/files/${resToDelete.projectId}/${resToDelete.folderName}/${resToDelete.fileName}`, {
+        const encodedProjectId = encodeURIComponent(resToDelete.projectId);
+        const encodedFolderName = encodeURIComponent(resToDelete.folderName);
+        const encodedFileName = encodeURIComponent(resToDelete.fileName);
+        await fetch(`http://localhost:3001/api/files/${encodedProjectId}/${encodedFolderName}/${encodedFileName}`, {
           method: 'DELETE'
         });
       } catch (e) {
@@ -307,7 +351,7 @@ export default function App() {
   const handleDeleteFolder = useCallback(async (projectId: string, folderName: string) => {
     // 1. Delete physical folder
     try {
-      await fetch(`http://localhost:3001/api/folders/${projectId}/${folderName}`, {
+      await fetch(`http://localhost:3001/api/folders/${encodeURIComponent(projectId)}/${encodeURIComponent(folderName)}`, {
         method: 'DELETE'
       });
     } catch (e) {
@@ -331,7 +375,7 @@ export default function App() {
   const handleDeleteProject = useCallback(async (projectId: string) => {
     // 1. Delete physical project folder
     try {
-      await fetch(`http://localhost:3001/api/projects/${projectId}`, {
+      await fetch(`http://localhost:3001/api/projects/${encodeURIComponent(projectId)}`, {
         method: 'DELETE'
       });
     } catch (e) {
@@ -396,24 +440,24 @@ export default function App() {
     // 1. Inside a specific Folder: Show Resource List (Table)
     if (selectedProjectId && selectedFolderName) {
       const project = projects.find(p => p.id === selectedProjectId);
-      const items = resources.filter(r => r.projectId === selectedProjectId && r.folderName === selectedFolderName);
+      const items = resources
+        .filter(r => r.projectId === selectedProjectId && r.folderName === selectedFolderName)
+        .sort((a, b) => {
+          if (a.availableQuantity > 0 && b.availableQuantity === 0) return -1;
+          if (a.availableQuantity === 0 && b.availableQuantity > 0) return 1;
+          return 0;
+        });
 
       return (
         <div className="animate-in slide-in-from-right-8 duration-500">
-          <Breadcrumb
-            items={[
-              { title: <a onClick={() => { setSelectedProjectId(null); setSelectedFolderName(null); }}>{t.projects.breadcrumbs}</a> },
-              { title: <a onClick={() => setSelectedFolderName(null)}>{project?.name}</a> },
-              { title: selectedFolderName }
-            ]}
-            style={{ marginBottom: 24 }}
-          />
-
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-            <Space>
-              <FolderOpenOutlined style={{ fontSize: 24, color: '#1677ff' }} />
-              <Title level={3} style={{ margin: 0 }}>{selectedFolderName}</Title>
-            </Space>
+            <Breadcrumb
+              items={[
+                { title: <a onClick={() => { setSelectedProjectId(null); setSelectedFolderName(null); }}>{t.projects.breadcrumbs}</a> },
+                { title: <a onClick={() => setSelectedFolderName(null)}>{project?.name}</a> },
+                { title: <span className="font-semibold text-blue-600">{selectedFolderName}</span> }
+              ]}
+            />
             <Space>
               <Button type="primary" icon={<UploadOutlined />} onClick={() => {
                 uploadForm.setFieldsValue({ folderName: selectedFolderName });
@@ -428,95 +472,193 @@ export default function App() {
                 }}
                 okText={t.common.yes}
                 cancelText={t.common.no}
-                okButtonProps={{ danger: true }}
               >
                 <Button danger icon={<DeleteOutlined />}>{t.folders.deleteBtn}</Button>
               </Popconfirm>
             </Space>
           </div>
 
-          <Table
-            dataSource={items}
-            rowKey="id"
-            pagination={false}
-            columns={[
-              {
-                title: t.resources.columns.name,
-                key: 'name',
-                render: (_, r) => (
-                  <Space>
-                    <FileTextOutlined className="text-blue-500" />
-                    <Text strong>{r.name}</Text>
-                  </Space>
-                )
-              },
-              {
-                title: t.common.description,
-                dataIndex: 'description',
-                key: 'description',
-                ellipsis: true,
-              },
-              {
-                title: t.resources.columns.type,
-                dataIndex: 'type',
-                key: 'type',
-                render: (type) => <Tag color="blue">{type}</Tag>
-              },
-              {
-                title: t.resources.columns.fileName,
-                dataIndex: 'fileName',
-                key: 'fileName',
-                render: (name) => <Text type="secondary" style={{ fontSize: 12 }}>{name}</Text>
-              },
-              {
-                title: t.resources.columns.stock,
-                dataIndex: 'availableQuantity',
-                key: 'stock',
-                render: (qty) => (
-                  <Text strong style={{ color: qty < 5 ? '#f5222d' : '#52c41a' }}>
-                    {qty}
-                  </Text>
-                )
-              },
-              {
-                title: t.resources.columns.claimants,
-                key: 'claimants',
-                ellipsis: true,
-                render: (_, r) => {
-                  const claimants = claims.filter(c => c.resourceId === r.id).map(c => c.borrowerName);
-                  return claimants.length > 0 ? (
-                    <Text type="secondary" style={{ fontSize: 12 }}>{claimants.join(', ')}</Text>
-                  ) : <Text type="secondary" italic>-</Text>;
+          <Row gutter={16} style={{ marginBottom: 24 }}>
+            <Col span={8}>
+              <Card size="small" className="bg-blue-50/50 border-blue-100">
+                <Statistic title={t.stats.resources} value={items.length} prefix={<FileTextOutlined className="text-blue-500" />} />
+              </Card>
+            </Col>
+            <Col span={8}>
+              <Card size="small" className="bg-emerald-50/50 border-emerald-100">
+                <Statistic title={t.resources.columns.stock} value={items.reduce((acc, curr) => acc + curr.availableQuantity, 0)} prefix={<CheckCircleOutlined className="text-emerald-500" />} />
+              </Card>
+            </Col>
+            <Col span={8}>
+              <Card size="small" className="bg-indigo-50/50 border-indigo-100">
+                <Statistic title={t.stats.claims} value={claims.filter(c => items.some(i => i.id === c.resourceId)).length} prefix={<DownloadOutlined className="text-indigo-500" />} />
+              </Card>
+            </Col>
+          </Row>
+
+          <Card bordered={false} styles={{ body: { padding: 0 } }} className="shadow-sm overflow-hidden">
+            <Table
+              dataSource={items}
+              rowKey="id"
+              pagination={false}
+              className="custom-table"
+              columns={[
+                {
+                  title: t.resources.columns.name,
+                  key: 'name',
+                  render: (_, r) => (
+                    <Space>
+                      <FileTextOutlined className="text-blue-500" />
+                      <Text strong>{r.name}</Text>
+                    </Space>
+                  )
+                },
+                {
+                  title: t.resources.columns.type,
+                  dataIndex: 'type',
+                  key: 'type',
+                  width: 100,
+                  render: (type) => {
+                    const colors: Record<string, string> = {
+                      [ResourceType.CONFIG]: 'blue',
+                      [ResourceType.CERTIFICATE]: 'gold',
+                      [ResourceType.KEY]: 'red',
+                      [ResourceType.DOCUMENT]: 'cyan',
+                      [ResourceType.DATA_SAMPLE]: 'purple'
+                    };
+                    return <Tag color={colors[type] || 'default'} variant="light" style={{ margin: 0 }}>{type}</Tag>
+                  }
+                },
+                {
+                  title: t.resources.columns.fileName,
+                  dataIndex: 'fileName',
+                  key: 'fileName',
+                  width: 150,
+                  ellipsis: true,
+                  render: (name) => <Text type="secondary" style={{ fontSize: 12 }}>{name}</Text>
+                },
+                {
+                  title: t.resources.columns.stock,
+                  dataIndex: 'availableQuantity',
+                  key: 'stock',
+                  width: 80,
+                  align: 'center',
+                  render: (qty) => (
+                    <Badge count={qty} color={qty < 5 ? '#ff4d4f' : '#52c41a'} showZero overflowCount={999} />
+                  )
+                },
+                {
+                  title: t.resources.columns.claimants,
+                  key: 'claimants',
+                  width: 150,
+                  ellipsis: true,
+                  render: (_, r) => {
+                    const claimantsList = claims.filter(c => c.resourceId === r.id).map(c => c.borrowerName);
+                    return claimantsList.length > 0 ? (
+                      <AntTooltip title={claimantsList.join(', ')}>
+                        <Text type="secondary" style={{ fontSize: 12 }}>{claimantsList.join(', ')}</Text>
+                      </AntTooltip>
+                    ) : <Text type="secondary" italic>-</Text>;
+                  }
+                },
+                {
+                  title: t.common.description,
+                  key: 'description',
+                  width: 250,
+                  render: (_, r) => (
+                    <div
+                      onDoubleClick={() => setInlineEditingId(r.id)}
+                      style={{ cursor: 'pointer', minHeight: '24px', position: 'relative' }}
+                      className="group"
+                    >
+                      {inlineEditingId === r.id ? (
+                        <Input.TextArea
+                          autoFocus
+                          defaultValue={r.description}
+                          onBlur={(e) => handleUpdateDescription(r.id, e.target.value)}
+                          onPressEnter={(e) => {
+                            if (!e.shiftKey) {
+                              handleUpdateDescription(r.id, (e.target as any).value);
+                            }
+                          }}
+                          autoSize={{ minRows: 2, maxRows: 6 }}
+                          className="text-xs shadow-sm border-blue-400"
+                          style={{ padding: '4px 8px' }}
+                        />
+                      ) : (
+                        <div className="flex items-start justify-between">
+                          <Text
+                            type={r.description ? 'reset' : 'secondary'}
+                            italic={!r.description}
+                            style={{ fontSize: 12, display: 'block', maxWidth: '85%' }}
+                            ellipsis={{ tooltip: r.description }}
+                          >
+                            {r.description || t.common.optional}
+                          </Text>
+                          <EditOutlined
+                            className="opacity-0 group-hover:opacity-40 transition-opacity"
+                            style={{ fontSize: 10, marginTop: 4 }}
+                            onClick={() => setInlineEditingId(r.id)}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  )
+                },
+                {
+                  title: t.common.action,
+                  key: 'action',
+                  width: 140,
+                  fixed: 'right',
+                  align: 'center',
+                  render: (_, r) => (
+                    <Space size={0}>
+                      <AntTooltip title={t.common.download}>
+                        <Button
+                          type="text"
+                          icon={<DownloadOutlined />}
+                          disabled={r.availableQuantity === 0}
+                          className="text-blue-600 flex items-center justify-center"
+                          onClick={() => { setSelectedResource(r); setIsClaimOpen(true); }}
+                        />
+                      </AntTooltip>
+                      <AntTooltip title={t.common.edit}>
+                        <Button
+                          type="text"
+                          icon={<EditOutlined />}
+                          className="text-amber-600 flex items-center justify-center"
+                          onClick={() => {
+                            setSelectedResource(r);
+                            editForm.setFieldsValue({
+                              name: r.name,
+                              type: r.type,
+                              quantity: r.totalQuantity,
+                              limit: r.maxClaimsPerUser,
+                              description: r.description
+                            });
+                            setIsEditOpen(true);
+                          }}
+                        />
+                      </AntTooltip>
+                      <Popconfirm
+                        title={t.resources.deleteTitle}
+                        description={t.resources.deleteDesc}
+                        onConfirm={() => handleDeleteResource(r.id)}
+                        okText={t.common.yes}
+                        cancelText={t.common.no}
+                        okButtonProps={{ danger: true }}
+                      >
+                        <AntTooltip title={t.common.delete}>
+                          <Button type="text" danger icon={<DeleteOutlined />} className="flex items-center justify-center" />
+                        </AntTooltip>
+                      </Popconfirm>
+                    </Space>
+                  )
                 }
-              },
-              {
-                title: t.common.action,
-                key: 'action',
-                render: (_, r) => (
-                  <Space size="small">
-                    <Button
-                      type="link"
-                      size="small"
-                      icon={<DownloadOutlined />}
-                      disabled={r.availableQuantity === 0}
-                      onClick={() => { setSelectedResource(r); setIsClaimOpen(true); }}
-                    >
-                      {t.common.download}
-                    </Button>
-                    <Popconfirm
-                      title={t.resources.deleteTitle}
-                      description={t.resources.deleteDesc}
-                      onConfirm={() => handleDeleteResource(r.id)}
-                      okText={t.common.yes}
-                      cancelText={t.common.no}
-                    >
-                      <Button type="text" danger icon={<DeleteOutlined />} size="small" />
-                    </Popconfirm>
-                  </Space>
-                )
-              }
-            ]}
-          />
+              ]}
+              scroll={{ x: 1100 }}
+            />
+          </Card>
           {items.length === 0 && <Empty description={t.folders.emptyResource} style={{ marginTop: 40 }} />}
         </div>
       );
@@ -738,12 +880,12 @@ export default function App() {
                   fileList={uploadFileList}
                   beforeUpload={() => false}
                   onChange={({ fileList }) => {
-                    setUploadFileList(fileList.slice(-1));
-                    if (fileList.length > 0) {
+                    setUploadFileList(fileList);
+                    if (fileList.length === 1) {
                       uploadForm.setFieldsValue({ name: fileList[0].name });
                     }
                   }}
-                  multiple={false}
+                  multiple={true}
                 >
                   <p className="ant-upload-drag-icon"><InboxOutlined /></p>
                   <p className="ant-upload-text">{t.resources.modals.dragText}</p>
@@ -761,8 +903,8 @@ export default function App() {
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="name" label={t.resources.modals.nameLabel} rules={[{ required: true }]}>
-                <Input placeholder={t.resources.modals.namePlace} />
+              <Form.Item name="name" label={t.resources.modals.nameLabel}>
+                <Input placeholder={t.common.optional} />
               </Form.Item>
             </Col>
 
@@ -791,6 +933,41 @@ export default function App() {
             </Col>
           </Row>
           <Button type="primary" htmlType="submit" block size="large" icon={<UploadOutlined />}>{t.resources.modals.submit}</Button>
+        </Form>
+      </Modal>
+
+      <Modal title={t.resources.modals.editTitle} open={isEditOpen} onCancel={() => setIsEditOpen(false)} footer={null} width={700}>
+        <Form form={editForm} layout="vertical" onFinish={handleEditSubmit}>
+          <Row gutter={24}>
+            <Col span={12}>
+              <Form.Item name="name" label={t.resources.modals.nameLabel}>
+                <Input placeholder={t.common.optional} />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="type" label={t.resources.modals.typeLabel}>
+                <Select options={[
+                  { label: t.types.config, value: ResourceType.CONFIG },
+                  { label: t.types.cert, value: ResourceType.CERTIFICATE },
+                  { label: t.types.key, value: ResourceType.KEY },
+                  { label: t.types.doc, value: ResourceType.DOCUMENT },
+                  { label: t.types.sample, value: ResourceType.DATA_SAMPLE }
+                ]} />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="quantity" label={t.resources.modals.qtyLabel}><InputNumber min={1} style={{ width: '100%' }} /></Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="limit" label={t.resources.modals.limitLabel}><InputNumber min={0} style={{ width: '100%' }} tooltip={t.resources.modals.limitTooltip} /></Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item name="description" label={t.resources.modals.techDescLabel}>
+                <Input.TextArea rows={4} placeholder={t.resources.modals.techDescPlace} />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Button type="primary" htmlType="submit" block size="large" icon={<CheckCircleOutlined />}>{t.common.yes}</Button>
         </Form>
       </Modal>
 
