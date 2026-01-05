@@ -1,23 +1,23 @@
 
 import React, { useState, useMemo, useCallback } from 'react';
-import { 
-  Layout, 
-  Menu, 
-  Card, 
-  Row, 
-  Col, 
-  Statistic, 
-  Button, 
-  Table, 
-  Tag, 
-  Modal, 
-  Form, 
-  Input, 
-  InputNumber, 
-  Select, 
-  Badge, 
-  Progress, 
-  Empty, 
+import {
+  Layout,
+  Menu,
+  Card,
+  Row,
+  Col,
+  Statistic,
+  Button,
+  Table,
+  Tag,
+  Modal,
+  Form,
+  Input,
+  InputNumber,
+  Select,
+  Badge,
+  Progress,
+  Empty,
   message,
   Typography,
   ConfigProvider,
@@ -28,12 +28,12 @@ import {
   Popconfirm,
   Tooltip as AntTooltip
 } from 'antd';
-import { 
-  DashboardOutlined, 
-  ProjectOutlined, 
-  HistoryOutlined, 
-  PlusOutlined, 
-  SearchOutlined, 
+import {
+  DashboardOutlined,
+  ProjectOutlined,
+  HistoryOutlined,
+  PlusOutlined,
+  SearchOutlined,
   ArrowLeftOutlined,
   UserOutlined,
   SolutionOutlined,
@@ -51,20 +51,24 @@ import {
   FolderAddOutlined,
   DeleteOutlined
 } from '@ant-design/icons';
-import { 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip as ChartTooltip, 
-  ResponsiveContainer, 
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip as ChartTooltip,
+  ResponsiveContainer,
   Cell,
   PieChart,
   Pie
 } from 'recharts';
 import { getResourceAssistantResponse } from './services/geminiService.ts';
+import { StorageService } from './services/storage.ts';
+import { translations } from './locales.ts';
 import { Resource, Project, Folder, ResourceType, ClaimRecord } from './types.ts';
+import zhCN from 'antd/locale/zh_CN';
+import enUS from 'antd/locale/en_US';
 
 const { Header, Content, Footer } = Layout;
 const { Title, Text, Paragraph } = Typography;
@@ -141,12 +145,44 @@ const MOCK_RESOURCES: Resource[] = [
 // --- APP COMPONENT ---
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [projects, setProjects] = useState<Project[]>(MOCK_PROJECTS);
-  const [folders, setFolders] = useState<Folder[]>(MOCK_FOLDERS);
-  const [resources, setResources] = useState<Resource[]>(MOCK_RESOURCES);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [folders, setFolders] = useState<Folder[]>([]);
+  const [resources, setResources] = useState<Resource[]>([]);
   const [claims, setClaims] = useState<ClaimRecord[]>([]);
+  const [lang, setLang] = useState<'en' | 'zh'>('zh');
+
+  const t = useMemo(() => translations[lang], [lang]);
+
+  // Load Data on Mount
+  React.useEffect(() => {
+    const initData = async () => {
+      try {
+        await StorageService.initDB();
+        await StorageService.seedDatabase(MOCK_PROJECTS, MOCK_FOLDERS, MOCK_RESOURCES);
+
+        const [loadedProjects, loadedFolders, loadedResources, loadedClaims] = await Promise.all([
+          StorageService.getAll<Project>(StorageService.STORES.PROJECTS),
+          StorageService.getAll<Folder>(StorageService.STORES.FOLDERS),
+          StorageService.getAll<Resource>(StorageService.STORES.RESOURCES),
+          StorageService.getAll<ClaimRecord>(StorageService.STORES.CLAIMS)
+        ]);
+
+        setProjects(loadedProjects);
+        setFolders(loadedFolders);
+        setResources(loadedResources);
+        setClaims(loadedClaims);
+      } catch (error) {
+        console.error("Failed to load data:", error);
+        message.error("Failed to load persistent data.");
+      }
+    };
+    initData();
+  }, []);
+  /* New State */
+  const [selectedFolderName, setSelectedFolderName] = useState<string | null>(null);
+
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
-  
+
   const [aiLoading, setAiLoading] = useState(false);
   const [aiResponse, setAiResponse] = useState<string | null>(null);
 
@@ -155,10 +191,10 @@ export default function App() {
   const [isClaimOpen, setIsClaimOpen] = useState(false);
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
   const [isFolderModalOpen, setIsFolderModalOpen] = useState(false);
-  
+
   const [selectedResource, setSelectedResource] = useState<Resource | null>(null);
   const [uploadFileList, setUploadFileList] = useState<any[]>([]);
-  
+
   const [uploadForm] = Form.useForm();
   const [claimForm] = Form.useForm();
   const [projectForm] = Form.useForm();
@@ -192,11 +228,18 @@ export default function App() {
       claimDate: new Date().toISOString().split('T')[0]
     };
 
+    // Update DB
+    await StorageService.add(StorageService.STORES.CLAIMS, newClaim);
+
+    // Update Resource Stock in DB
+    const updatedResource = { ...selectedResource, availableQuantity: selectedResource.availableQuantity - 1 };
+    await StorageService.update(StorageService.STORES.RESOURCES, updatedResource);
+
     setClaims(prev => [...prev, newClaim]);
-    setResources(prev => prev.map(r => 
-      r.id === selectedResource.id ? { ...r, availableQuantity: r.availableQuantity - 1 } : r
+    setResources(prev => prev.map(r =>
+      r.id === selectedResource.id ? updatedResource : r
     ));
-    
+
     const content = selectedResource.fileContent || `[Nexus Ops Logged Access]\nFile: ${selectedResource.name}\nRequested by: ${borrowerName}\nTimestamp: ${new Date().toLocaleString()}`;
     const blob = new Blob([content], { type: 'text/plain' });
     const url = window.URL.createObjectURL(blob);
@@ -206,11 +249,11 @@ export default function App() {
     a.click();
     window.URL.revokeObjectURL(url);
 
-    message.success('Configuration downloaded and access logged.');
+    message.success(t.claims.modals.success);
     setIsClaimOpen(false);
     setSelectedResource(null);
     claimForm.resetFields();
-  }, [selectedResource, claims, claimForm]);
+  }, [selectedResource, claims, claimForm, t]);
 
   const handleUploadSubmit = useCallback(async (values: any) => {
     if (uploadFileList.length === 0) {
@@ -220,9 +263,9 @@ export default function App() {
 
     const file = uploadFileList[0].originFileObj;
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = async (e) => {
       const content = e.target?.result as string;
-      
+
       const newResource: Resource = {
         id: Math.random().toString(36).substr(2, 9),
         projectId: selectedProjectId!,
@@ -239,16 +282,18 @@ export default function App() {
         createdAt: new Date().toISOString().split('T')[0]
       };
 
+      await StorageService.add(StorageService.STORES.RESOURCES, newResource);
+
       setResources(prev => [...prev, newResource]);
-      message.success(`Resource "${newResource.name}" uploaded successfully`);
+      message.success(t.resources.modals.success.replace('{name}', newResource.name));
       setIsUploadOpen(false);
       setUploadFileList([]);
       uploadForm.resetFields();
     };
     reader.readAsText(file);
-  }, [selectedProjectId, uploadForm, uploadFileList]);
+  }, [selectedProjectId, uploadForm, uploadFileList, t]);
 
-  const handleCreateProject = useCallback((values: any) => {
+  const handleCreateProject = useCallback(async (values: any) => {
     const newProject: Project = {
       id: 'p' + (projects.length + 10) + Math.floor(Math.random() * 1000),
       name: values.name,
@@ -257,47 +302,67 @@ export default function App() {
       status: 'active',
       createdAt: new Date().toISOString().split('T')[0]
     };
+    await StorageService.add(StorageService.STORES.PROJECTS, newProject);
     setProjects(prev => [...prev, newProject]);
-    message.success('Project created successfully');
+    message.success(t.projects.modals.success);
     setIsProjectModalOpen(false);
     projectForm.resetFields();
-  }, [projects, projectForm]);
+  }, [projects, projectForm, t]);
 
-  const handleCreateFolder = useCallback((values: any) => {
+  const handleCreateFolder = useCallback(async (values: any) => {
     if (!selectedProjectId) return;
     const newFolder: Folder = {
       id: 'f' + (folders.length + 10) + Math.floor(Math.random() * 1000),
       projectId: selectedProjectId,
       name: values.name
     };
+    await StorageService.add(StorageService.STORES.FOLDERS, newFolder);
     setFolders(prev => [...prev, newFolder]);
-    message.success(`Folder "${values.name}" created`);
+    message.success(t.folders.modals.success.replace('{name}', values.name));
     setIsFolderModalOpen(false);
     folderForm.resetFields();
-  }, [selectedProjectId, folders, folderForm]);
+  }, [selectedProjectId, folders, folderForm, t]);
 
-  const handleDeleteResource = useCallback((resourceId: string) => {
+  const handleDeleteResource = useCallback(async (resourceId: string) => {
+    await StorageService.remove(StorageService.STORES.RESOURCES, resourceId);
     setResources(prev => prev.filter(r => r.id !== resourceId));
-    message.success('Resource deleted successfully');
-  }, []);
+    message.success(t.resources.deleteSuccess);
+  }, [t]);
 
-  const handleDeleteFolder = useCallback((projectId: string, folderName: string) => {
-    // Delete folder entry
+  const handleDeleteFolder = useCallback(async (projectId: string, folderName: string) => {
+    // Delete folder entry from DB
+    const folder = folders.find(f => f.projectId === projectId && f.name === folderName);
+    if (folder) await StorageService.remove(StorageService.STORES.FOLDERS, folder.id);
+
+    // Filter resources to delete
+    const resourcesToDelete = resources.filter(r => r.projectId === projectId && r.folderName === folderName);
+    for (const r of resourcesToDelete) {
+      await StorageService.remove(StorageService.STORES.RESOURCES, r.id);
+    }
+
     setFolders(prev => prev.filter(f => !(f.projectId === projectId && f.name === folderName)));
-    // Delete all resources in that folder
     setResources(prev => prev.filter(r => !(r.projectId === projectId && r.folderName === folderName)));
-    message.success(`Folder "${folderName}" and its resources deleted`);
-  }, []);
+    message.success(t.folders.deleteSuccess.replace('{name}', folderName));
+  }, [folders, resources, t]);
 
-  const handleDeleteProject = useCallback((projectId: string) => {
+  const handleDeleteProject = useCallback(async (projectId: string) => {
+    await StorageService.remove(StorageService.STORES.PROJECTS, projectId);
+
+    // Cascade delete folders and resources
+    const projectFolders = folders.filter(f => f.projectId === projectId);
+    for (const f of projectFolders) await StorageService.remove(StorageService.STORES.FOLDERS, f.id);
+
+    const projectResources = resources.filter(r => r.projectId === projectId);
+    for (const r of projectResources) await StorageService.remove(StorageService.STORES.RESOURCES, r.id);
+
     setProjects(prev => prev.filter(p => p.id !== projectId));
     setFolders(prev => prev.filter(f => f.projectId !== projectId));
     setResources(prev => prev.filter(r => r.projectId !== projectId));
-    message.success('Project and all its contents deleted');
+    message.success(t.projects.modals.deleteSuccess);
     if (selectedProjectId === projectId) {
       setSelectedProjectId(null);
     }
-  }, [selectedProjectId]);
+  }, [selectedProjectId, folders, resources, t]);
 
   const handleAiSearch = useCallback(async (q: string) => {
     if (!q) return;
@@ -315,20 +380,20 @@ export default function App() {
   const renderDashboard = () => (
     <Space direction="vertical" size="large" style={{ width: '100%' }}>
       <Row gutter={[24, 24]}>
-        <Col xs={24} sm={12} lg={6}><Card bordered={false}><Statistic title="Managed Projects" value={stats.totalProjects} prefix={<ProjectOutlined className="text-blue-500" />} /></Card></Col>
-        <Col xs={24} sm={12} lg={6}><Card bordered={false}><Statistic title="Total Config Files" value={stats.totalResources} prefix={<FileTextOutlined className="text-indigo-500" />} /></Card></Col>
-        <Col xs={24} sm={12} lg={6}><Card bordered={false}><Statistic title="Downloads Logged" value={stats.activeClaims} prefix={<DownloadOutlined className="text-emerald-500" />} /></Card></Col>
-        <Col xs={24} sm={12} lg={6}><Card bordered={false}><Statistic title="Missing Configs" value={stats.outOfStockItems} valueStyle={{ color: stats.outOfStockItems > 0 ? '#ff4d4f' : '#52c41a' }} prefix={<ExclamationCircleOutlined />} /></Card></Col>
+        <Col xs={24} sm={12} lg={6}><Card bordered={false}><Statistic title={t.stats.projects} value={stats.totalProjects} prefix={<ProjectOutlined className="text-blue-500" />} /></Card></Col>
+        <Col xs={24} sm={12} lg={6}><Card bordered={false}><Statistic title={t.stats.resources} value={stats.totalResources} prefix={<FileTextOutlined className="text-indigo-500" />} /></Card></Col>
+        <Col xs={24} sm={12} lg={6}><Card bordered={false}><Statistic title={t.stats.claims} value={stats.activeClaims} prefix={<DownloadOutlined className="text-emerald-500" />} /></Card></Col>
+        <Col xs={24} sm={12} lg={6}><Card bordered={false}><Statistic title={t.stats.missing} value={stats.outOfStockItems} valueStyle={{ color: stats.outOfStockItems > 0 ? '#ff4d4f' : '#52c41a' }} prefix={<ExclamationCircleOutlined />} /></Card></Col>
       </Row>
       <Card bordered={false} style={{ background: 'linear-gradient(135deg, #1677ff 0%, #722ed1 100%)', color: 'white' }}>
-        <Title level={3} style={{ color: 'white', marginTop: 0 }}>Infrastructure AI Assistant</Title>
-        <Paragraph style={{ color: 'rgba(255,255,255,0.85)' }}>Query environment configurations or check cross-project resource distribution.</Paragraph>
-        <Input.Search 
-          placeholder="e.g., Which projects have OpenVPN configs?" 
-          enterButton="Ask Ops AI" 
-          size="large" 
-          loading={aiLoading} 
-          onSearch={handleAiSearch} 
+        <Title level={3} style={{ color: 'white', marginTop: 0 }}>{t.ai.title}</Title>
+        <Paragraph style={{ color: 'rgba(255,255,255,0.85)' }}>{t.ai.desc}</Paragraph>
+        <Input.Search
+          placeholder={t.ai.placeholder}
+          enterButton={t.ai.button}
+          size="large"
+          loading={aiLoading}
+          onSearch={handleAiSearch}
         />
         {aiResponse && <div style={{ marginTop: 20, padding: 16, background: 'rgba(255,255,255,0.1)', borderRadius: 8 }}>{aiResponse}</div>}
       </Card>
@@ -336,202 +401,310 @@ export default function App() {
   );
 
   const renderProjects = () => {
+    // 1. Inside a specific Folder: Show Resource List (Table)
+    if (selectedProjectId && selectedFolderName) {
+      const project = projects.find(p => p.id === selectedProjectId);
+      const items = resources.filter(r => r.projectId === selectedProjectId && r.folderName === selectedFolderName);
+
+      return (
+        <div className="animate-in slide-in-from-right-8 duration-500">
+          <Breadcrumb
+            items={[
+              { title: <a onClick={() => { setSelectedProjectId(null); setSelectedFolderName(null); }}>{t.projects.breadcrumbs}</a> },
+              { title: <a onClick={() => setSelectedFolderName(null)}>{project?.name}</a> },
+              { title: selectedFolderName }
+            ]}
+            style={{ marginBottom: 24 }}
+          />
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+            <Space>
+              <FolderOpenOutlined style={{ fontSize: 24, color: '#1677ff' }} />
+              <Title level={3} style={{ margin: 0 }}>{selectedFolderName}</Title>
+            </Space>
+            <Space>
+              <Button type="primary" icon={<UploadOutlined />} onClick={() => {
+                uploadForm.setFieldsValue({ folderName: selectedFolderName });
+                setIsUploadOpen(true);
+              }}>{t.folders.uploadBtn}</Button>
+              <Popconfirm
+                title={t.folders.deleteTitle}
+                description={t.folders.deleteDesc.replace('{name}', selectedFolderName)}
+                onConfirm={() => {
+                  handleDeleteFolder(selectedProjectId, selectedFolderName);
+                  setSelectedFolderName(null);
+                }}
+                okText={t.common.yes}
+                cancelText={t.common.no}
+                okButtonProps={{ danger: true }}
+              >
+                <Button danger icon={<DeleteOutlined />}>{t.folders.deleteBtn}</Button>
+              </Popconfirm>
+            </Space>
+          </div>
+
+          <Table
+            dataSource={items}
+            rowKey="id"
+            pagination={false}
+            columns={[
+              {
+                title: t.resources.columns.name,
+                key: 'name',
+                render: (_, r) => (
+                  <Space>
+                    <FileTextOutlined className="text-blue-500" />
+                    <Text strong>{r.name}</Text>
+                  </Space>
+                )
+              },
+              {
+                title: t.common.description,
+                dataIndex: 'description',
+                key: 'description',
+                ellipsis: true,
+              },
+              {
+                title: t.resources.columns.type,
+                dataIndex: 'type',
+                key: 'type',
+                render: (type) => <Tag color="blue">{type}</Tag>
+              },
+              {
+                title: t.resources.columns.fileName,
+                dataIndex: 'fileName',
+                key: 'fileName',
+                render: (name) => <Text type="secondary" style={{ fontSize: 12 }}>{name}</Text>
+              },
+              {
+                title: t.resources.columns.stock,
+                dataIndex: 'availableQuantity',
+                key: 'stock',
+                render: (qty) => (
+                  <Text strong style={{ color: qty < 5 ? '#f5222d' : '#52c41a' }}>
+                    {qty}
+                  </Text>
+                )
+              },
+              {
+                title: t.resources.columns.claimants,
+                key: 'claimants',
+                ellipsis: true,
+                render: (_, r) => {
+                  const claimants = claims.filter(c => c.resourceId === r.id).map(c => c.borrowerName);
+                  return claimants.length > 0 ? (
+                    <Text type="secondary" style={{ fontSize: 12 }}>{claimants.join(', ')}</Text>
+                  ) : <Text type="secondary" italic>-</Text>;
+                }
+              },
+              {
+                title: t.common.action,
+                key: 'action',
+                render: (_, r) => (
+                  <Space size="small">
+                    <Button
+                      type="link"
+                      size="small"
+                      icon={<DownloadOutlined />}
+                      disabled={r.availableQuantity === 0}
+                      onClick={() => { setSelectedResource(r); setIsClaimOpen(true); }}
+                    >
+                      {t.common.download}
+                    </Button>
+                    <Popconfirm
+                      title={t.resources.deleteTitle}
+                      description={t.resources.deleteDesc}
+                      onConfirm={() => handleDeleteResource(r.id)}
+                      okText={t.common.yes}
+                      cancelText={t.common.no}
+                    >
+                      <Button type="text" danger icon={<DeleteOutlined />} size="small" />
+                    </Popconfirm>
+                  </Space>
+                )
+              }
+            ]}
+          />
+          {items.length === 0 && <Empty description={t.folders.emptyResource} style={{ marginTop: 40 }} />}
+        </div>
+      );
+    }
+
+    // 2. Inside a Project: Show Folder Grid ("Netdisk" style)
     if (selectedProjectId) {
       const project = projects.find(p => p.id === selectedProjectId);
-      const projectResources = resources.filter(r => r.projectId === selectedProjectId);
       const projectFolders = folders.filter(f => f.projectId === selectedProjectId);
-      
-      const folderSet = new Set(projectFolders.map(f => f.name));
-      projectResources.forEach(r => folderSet.add(r.folderName));
-      const allFolderNames = Array.from(folderSet);
-
-      const collapseItems = allFolderNames.map((folderName) => {
-        const items = projectResources.filter(r => r.folderName === folderName);
-        return {
-          key: folderName,
-          label: (
-            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center', paddingRight: 24 }}>
-              <Text strong style={{ fontSize: 16 }}>{folderName}</Text>
-              <Popconfirm 
-                title="Delete Folder" 
-                description={`Delete "${folderName}" and all its contents?`} 
-                onConfirm={(e) => { e?.stopPropagation(); handleDeleteFolder(selectedProjectId, folderName); }}
-                onCancel={(e) => e?.stopPropagation()}
-                okText="Yes" 
-                cancelText="No"
-              >
-                <Button 
-                  type="text" 
-                  danger 
-                  icon={<DeleteOutlined />} 
-                  size="small" 
-                  onClick={(e) => e.stopPropagation()} 
-                />
-              </Popconfirm>
-            </div>
-          ),
-          children: (
-            <Row gutter={[16, 16]}>
-              {items.length > 0 ? (
-                items.map(r => (
-                  <Col xs={24} md={12} lg={8} key={r.id}>
-                    <Card 
-                      size="small"
-                      className="shadow-sm"
-                      title={<Space><FileTextOutlined className="text-blue-500" />{r.name}</Space>}
-                      extra={
-                        <Popconfirm 
-                          title="Delete File" 
-                          description="Are you sure you want to delete this resource?" 
-                          onConfirm={() => handleDeleteResource(r.id)} 
-                          okText="Yes" 
-                          cancelText="No"
-                        >
-                          <Button type="text" danger icon={<DeleteOutlined />} size="small" />
-                        </Popconfirm>
-                      }
-                      actions={[
-                        <Button 
-                          type="link" 
-                          icon={<DownloadOutlined />}
-                          disabled={r.availableQuantity === 0}
-                          onClick={() => { setSelectedResource(r); setIsClaimOpen(true); }}
-                        >
-                          Download
-                        </Button>,
-                        <Tag color="blue" style={{ border: 'none', margin: 0 }}>{r.type}</Tag>
-                      ]}
-                    >
-                      <Paragraph type="secondary" ellipsis={{ rows: 2 }} style={{ fontSize: 13, minHeight: 40 }}>{r.description}</Paragraph>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
-                        <Text type="secondary" style={{ fontSize: 11 }}>{r.fileName}</Text>
-                        <Text strong style={{ fontSize: 12, color: r.availableQuantity < 5 ? '#f5222d' : '#52c41a' }}>Stock: {r.availableQuantity}</Text>
-                      </div>
-                      {r.maxClaimsPerUser === 1 && <Tag color="orange" style={{ marginTop: 8, fontSize: 10 }}>Single Access Only</Tag>}
-                    </Card>
-                  </Col>
-                ))
-              ) : (
-                <Col span={24}>
-                  <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No files in this folder yet." />
-                </Col>
-              )}
-            </Row>
-          )
-        };
-      });
 
       return (
         <div className="animate-in slide-in-from-left-4 duration-500">
-          <Breadcrumb items={[{ title: <a onClick={() => setSelectedProjectId(null)}>Projects</a> }, { title: project?.name }]} style={{ marginBottom: 24 }} />
+          <Breadcrumb
+            items={[
+              { title: <a onClick={() => setSelectedProjectId(null)}>{t.projects.breadcrumbs}</a> },
+              { title: project?.name }
+            ]}
+            style={{ marginBottom: 24 }}
+          />
+
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 32 }}>
             <div>
               <Title level={2} style={{ marginBottom: 4 }}>{project?.name}</Title>
               <Text type="secondary">{project?.description}</Text>
             </div>
             <Space>
-              <Button icon={<FolderAddOutlined />} onClick={() => setIsFolderModalOpen(true)}>New Folder</Button>
-              <Button type="primary" icon={<UploadOutlined />} size="large" onClick={() => setIsUploadOpen(true)}>Upload Config</Button>
-              <Popconfirm 
-                title="Delete Project" 
-                description="This will permanently delete the project and all contents. Continue?" 
+              <Button icon={<FolderAddOutlined />} size="large" onClick={() => setIsFolderModalOpen(true)}>{t.folders.newBtn}</Button>
+              <Popconfirm
+                title={t.projects.deleteTitle}
+                description={t.projects.deleteAllDesc}
                 onConfirm={() => handleDeleteProject(selectedProjectId)}
-                okText="Delete All" 
-                cancelText="Cancel"
+                okText={t.projects.deleteAllBtn}
+                cancelText={t.common.no}
                 okButtonProps={{ danger: true }}
               >
                 <Button danger icon={<DeleteOutlined />} size="large" />
               </Popconfirm>
             </Space>
           </div>
-          <Collapse 
-            defaultActiveKey={allFolderNames} 
-            ghost 
-            items={collapseItems} 
-            expandIcon={({ isActive }) => <FolderOpenOutlined rotate={isActive ? 90 : 0} />}
-          />
-          {allFolderNames.length === 0 && <Empty description="This project has no folders or files." />}
+
+          <Row gutter={[24, 24]}>
+            {projectFolders.map(f => (
+              <Col xs={12} sm={8} md={6} lg={4} key={f.id}>
+                <Card
+                  hoverable
+                  className="folder-card"
+                  style={{ textAlign: 'center', borderRadius: 12, border: '1px solid #f0f0f0' }}
+                  styles={{ body: { padding: '24px 12px' } }}
+                  onClick={() => setSelectedFolderName(f.name)}
+                >
+                  <FolderOpenOutlined style={{ fontSize: 48, color: '#FFC107', marginBottom: 16 }} />
+                  <br />
+                  <Text strong style={{ fontSize: 16 }}>{f.name}</Text>
+                  <div style={{ marginTop: 8 }}>
+                    <Text type="secondary" style={{ fontSize: 12 }}>
+                      {resources.filter(r => r.projectId === selectedProjectId && r.folderName === f.name).length} items
+                    </Text>
+                  </div>
+                </Card>
+              </Col>
+            ))}
+            {projectFolders.length === 0 && (
+              <Col span={24}>
+                <Empty
+                  image={Empty.PRESENTED_IMAGE_SIMPLE}
+                  description={
+                    <Space direction="vertical">
+                      <Text type="secondary">{t.projects.emptyState}</Text>
+                      <Button type="dashed" icon={<FolderAddOutlined />} onClick={() => setIsFolderModalOpen(true)}>{t.projects.createFirstFolder}</Button>
+                    </Space>
+                  }
+                />
+              </Col>
+            )}
+          </Row>
         </div>
       );
     }
 
+    // 3. Root: Project List (unchanged)
     return (
       <div className="animate-in fade-in duration-500">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-          <Title level={2} style={{ margin: 0 }}>Environments Directory</Title>
-          <Button type="primary" icon={<PlusOutlined />} size="large" onClick={() => setIsProjectModalOpen(true)}>Create Environment</Button>
+          <Title level={2} style={{ margin: 0 }}>{t.projects.title}</Title>
+          <Button type="primary" icon={<PlusOutlined />} size="large" onClick={() => setIsProjectModalOpen(true)}>{t.projects.createButton}</Button>
         </div>
-        <Row gutter={[24, 24]}>
-          {projects.map(p => (
-            <Col xs={24} md={12} lg={8} key={p.id}>
-              <Card 
-                hoverable 
-                className="shadow-sm" 
-                onClick={() => setSelectedProjectId(p.id)} 
-                title={p.name} 
-                extra={
-                  <Space>
-                    <Tag color="green">{p.status.toUpperCase()}</Tag>
-                    <Popconfirm 
-                      title="Delete Project" 
-                      description="Delete this project?" 
-                      onConfirm={(e) => { e?.stopPropagation(); handleDeleteProject(p.id); }} 
-                      onCancel={(e) => e?.stopPropagation()}
-                      okText="Yes" 
-                      cancelText="No"
-                    >
-                      <Button 
-                        type="text" 
-                        danger 
-                        icon={<DeleteOutlined />} 
-                        onClick={(e) => e.stopPropagation()} 
-                      />
-                    </Popconfirm>
-                  </Space>
-                }
-              >
-                <Paragraph ellipsis={{ rows: 2 }} type="secondary" style={{ minHeight: 44 }}>{p.description}</Paragraph>
-                <div style={{ borderTop: '1px solid #f0f0f0', paddingTop: 12, display: 'flex', justifyContent: 'space-between' }}>
-                  <Text type="secondary"><UserOutlined /> {p.manager}</Text>
-                  <Text type="primary">View Folders <ArrowLeftOutlined rotate={180} /></Text>
-                </div>
-              </Card>
-            </Col>
-          ))}
-          {projects.length === 0 && <Col span={24}><Empty description="No projects available. Create one to get started." /></Col>}
-        </Row>
+        <Table
+          dataSource={projects}
+          rowKey="id"
+          columns={[
+            {
+              title: t.projects.columns.name,
+              dataIndex: 'name',
+              key: 'name',
+              render: (text, record) => (
+                <a onClick={() => setSelectedProjectId(record.id)}>
+                  <Text strong style={{ fontSize: 16 }}>{text}</Text>
+                </a>
+              ),
+            },
+            {
+              title: t.common.description,
+              dataIndex: 'description',
+              key: 'description',
+              ellipsis: true,
+            },
+            {
+              title: t.projects.columns.manager,
+              dataIndex: 'manager',
+              key: 'manager',
+              render: (text) => <Space><UserOutlined /> {text}</Space>
+            },
+            {
+              title: t.projects.columns.status,
+              dataIndex: 'status',
+              key: 'status',
+              render: (status) => <Tag color="green">{status.toUpperCase()}</Tag>
+            },
+            {
+              title: t.common.action,
+              key: 'action',
+              render: (_, p) => (
+                <Popconfirm
+                  title={t.projects.deleteTitle}
+                  description={t.projects.deleteDesc}
+                  onConfirm={(e) => { e?.stopPropagation(); handleDeleteProject(p.id); }}
+                  onCancel={(e) => e?.stopPropagation()}
+                  okText={t.common.yes}
+                  cancelText={t.common.no}
+                >
+                  <Button
+                    type="text"
+                    danger
+                    icon={<DeleteOutlined />}
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                </Popconfirm>
+              )
+            }
+          ]}
+        />
       </div>
     );
   };
 
+
+
   const renderHistory = () => (
-    <Card title="Configuration Access Logs" bordered={false}>
-      <Table 
+    <Card title={t.claims.title} bordered={false}>
+      <Table
         dataSource={claims.map(c => ({ ...c, key: c.id }))}
         columns={[
-          { title: 'Engineer', dataIndex: 'borrowerName', key: 'name' },
-          { title: 'Resource', key: 'res', render: (_, rec) => {
-            const res = resources.find(r => r.id === rec.resourceId);
-            return res ? res.name : <Text type="secondary" italic>(Deleted Resource)</Text>;
-          }},
-          { title: 'Date', dataIndex: 'claimDate', key: 'date' },
-          { title: 'Reason', dataIndex: 'purpose', key: 'purpose', ellipsis: true },
-          { title: 'Status', key: 's', render: () => <Tag color="success">DOWNLOADED</Tag> }
+          { title: t.claims.columns.engineer, dataIndex: 'borrowerName', key: 'name' },
+          {
+            title: t.claims.columns.resource, key: 'res', render: (_, rec) => {
+              const res = resources.find(r => r.id === rec.resourceId);
+              return res ? res.name : <Text type="secondary" italic>{t.claims.columns.deleted}</Text>;
+            }
+          },
+          { title: t.claims.columns.date, dataIndex: 'claimDate', key: 'date' },
+          { title: t.claims.columns.reason, dataIndex: 'purpose', key: 'purpose', ellipsis: true },
+          { title: t.claims.columns.status, key: 's', render: () => <Tag color="success">{t.claims.columns.downloaded}</Tag> }
         ]}
       />
     </Card>
   );
 
   return (
-    <ConfigProvider theme={{ token: { colorPrimary: '#1677ff', borderRadius: 6 } }}>
+    <ConfigProvider theme={{ token: { colorPrimary: '#1677ff', borderRadius: 6 } }} locale={lang === 'zh' ? zhCN : enUS}>
       <Layout style={{ minHeight: '100vh' }}>
         <Header style={{ background: 'white', display: 'flex', alignItems: 'center', padding: '0 24px', borderBottom: '1px solid #f0f0f0', position: 'sticky', top: 0, zIndex: 100 }}>
-          <Space style={{ marginRight: 40 }}><SolutionOutlined className="text-blue-600 text-xl" /><Title level={4} style={{ margin: 0 }}>Nexus Ops</Title></Space>
+          <Space style={{ marginRight: 40 }}><SolutionOutlined className="text-blue-600 text-xl" /><Title level={4} style={{ margin: 0 }}>{t.appTitle}</Title></Space>
           <Menu mode="horizontal" selectedKeys={[activeTab]} items={[
-            { key: 'dashboard', icon: <DashboardOutlined />, label: 'Dashboard' },
-            { key: 'projects', icon: <ProjectOutlined />, label: 'Environments' },
-            { key: 'history', icon: <HistoryOutlined />, label: 'Logs' },
+            { key: 'dashboard', icon: <DashboardOutlined />, label: t.menu.dashboard },
+            { key: 'projects', icon: <ProjectOutlined />, label: t.menu.projects },
+            { key: 'history', icon: <HistoryOutlined />, label: t.menu.history },
           ]} onClick={({ key }) => setActiveTab(key)} style={{ flex: 1, border: 'none' }} />
+          <Button onClick={() => setLang(lang === 'en' ? 'zh' : 'en')} style={{ marginLeft: 16 }}>
+            {lang === 'en' ? '中文' : 'EN'}
+          </Button>
         </Header>
         <Content style={{ padding: '32px 48px' }}>
           {activeTab === 'dashboard' && renderDashboard()}
@@ -540,40 +713,40 @@ export default function App() {
         </Content>
       </Layout>
 
-      <Modal title="Create New Environment Project" open={isProjectModalOpen} onCancel={() => setIsProjectModalOpen(false)} footer={null}>
+      <Modal title={t.projects.modals.createTitle} open={isProjectModalOpen} onCancel={() => setIsProjectModalOpen(false)} footer={null}>
         <Form form={projectForm} layout="vertical" onFinish={handleCreateProject}>
-          <Form.Item name="name" label="Environment Name" rules={[{ required: true }]}>
-            <Input placeholder="e.g. AWS Production Cluster" />
+          <Form.Item name="name" label={t.projects.modals.nameLabel} rules={[{ required: true }]}>
+            <Input placeholder={t.projects.modals.namePlace} />
           </Form.Item>
-          <Form.Item name="manager" label="Owner/Manager" rules={[{ required: true }]}>
-            <Input placeholder="Zhang Wei" />
+          <Form.Item name="manager" label={t.projects.modals.managerLabel} rules={[{ required: true }]}>
+            <Input placeholder={t.projects.modals.managerPlace} />
           </Form.Item>
-          <Form.Item name="description" label="Environment Description" rules={[{ required: true }]}>
-            <Input.TextArea rows={3} placeholder="Region, purpose, and key services..." />
+          <Form.Item name="description" label={t.projects.modals.descLabel} rules={[{ required: true }]}>
+            <Input.TextArea rows={3} placeholder={t.projects.modals.descPlace} />
           </Form.Item>
-          <Button type="primary" htmlType="submit" block size="large">Create Environment</Button>
+          <Button type="primary" htmlType="submit" block size="large">{t.projects.modals.submit}</Button>
         </Form>
       </Modal>
 
-      <Modal title="Add New Folder" open={isFolderModalOpen} onCancel={() => setIsFolderModalOpen(false)} footer={null}>
+      <Modal title={t.folders.modals.createTitle} open={isFolderModalOpen} onCancel={() => setIsFolderModalOpen(false)} footer={null}>
         <Form form={folderForm} layout="vertical" onFinish={handleCreateFolder}>
-          <Form.Item name="name" label="Folder Name" rules={[{ required: true }]}>
-            <Input placeholder="e.g. VPN_Configurations" />
+          <Form.Item name="name" label={t.folders.modals.nameLabel} rules={[{ required: true }]}>
+            <Input placeholder={t.folders.modals.namePlace} />
           </Form.Item>
-          <Button type="primary" htmlType="submit" block size="large">Create Folder</Button>
+          <Button type="primary" htmlType="submit" block size="large">{t.folders.modals.submit}</Button>
         </Form>
       </Modal>
 
-      <Modal title="Upload Resource File" open={isUploadOpen} onCancel={() => setIsUploadOpen(false)} footer={null} width={700}>
-        <Form form={uploadForm} layout="vertical" onFinish={handleUploadSubmit} initialValues={{ type: ResourceType.CONFIG, quantity: 10 }}>
+      <Modal title={t.resources.modals.uploadTitle} open={isUploadOpen} onCancel={() => setIsUploadOpen(false)} footer={null} width={700}>
+        <Form form={uploadForm} layout="vertical" onFinish={handleUploadSubmit} initialValues={{ type: ResourceType.CONFIG, quantity: 1 }}>
           <Row gutter={24}>
             <Col span={24}>
-              <Form.Item label="Upload File" required>
-                <Dragger 
+              <Form.Item label={t.resources.modals.fileLabel} required>
+                <Dragger
                   fileList={uploadFileList}
                   beforeUpload={() => false}
                   onChange={({ fileList }) => {
-                    setUploadFileList(fileList.slice(-1)); 
+                    setUploadFileList(fileList.slice(-1));
                     if (fileList.length > 0) {
                       uploadForm.setFieldsValue({ name: fileList[0].name });
                     }
@@ -581,59 +754,67 @@ export default function App() {
                   multiple={false}
                 >
                   <p className="ant-upload-drag-icon"><InboxOutlined /></p>
-                  <p className="ant-upload-text">Click or drag config file to this area to upload</p>
-                  <p className="ant-upload-hint">Support for .ovpn, .xml, .yaml, .json, .crt, .key files</p>
+                  <p className="ant-upload-text">{t.resources.modals.dragText}</p>
+                  <p className="ant-upload-hint">{t.resources.modals.dragHint}</p>
                 </Dragger>
               </Form.Item>
             </Col>
-            
+
             <Col span={12}>
-              <Form.Item name="folderName" label="Target Folder" rules={[{ required: true }]}>
-                <Select 
-                  placeholder="Select folder..." 
+              <Form.Item name="folderName" label={t.resources.modals.folderLabel} rules={[{ required: true }]}>
+                <Select
+                  placeholder={t.resources.modals.folderPlace}
                   options={folders.filter(f => f.projectId === selectedProjectId).map(f => ({ label: f.name, value: f.name }))}
                 />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="name" label="Resource Display Name" rules={[{ required: true }]}>
-                <Input placeholder="e.g., Production Admin VPN" />
+              <Form.Item name="name" label={t.resources.modals.nameLabel} rules={[{ required: true }]}>
+                <Input placeholder={t.resources.modals.namePlace} />
               </Form.Item>
             </Col>
 
             <Col span={12}>
-              <Form.Item name="type" label="Resource Type"><Select options={Object.values(ResourceType).map(v => ({ label: v, value: v }))} /></Form.Item>
+              <Form.Item name="type" label={t.resources.modals.typeLabel}>
+                <Select options={[
+                  { label: t.types.config, value: ResourceType.CONFIG },
+                  { label: t.types.cert, value: ResourceType.CERTIFICATE },
+                  { label: t.types.key, value: ResourceType.KEY },
+                  { label: t.types.doc, value: ResourceType.DOCUMENT },
+                  { label: t.types.sample, value: ResourceType.DATA_SAMPLE }
+                ]} />
+              </Form.Item>
             </Col>
             <Col span={6}>
-              <Form.Item name="quantity" label="Availability"><InputNumber min={1} style={{ width: '100%' }} /></Form.Item>
+              <Form.Item name="quantity" label={t.resources.modals.qtyLabel}><InputNumber min={1} style={{ width: '100%' }} /></Form.Item>
             </Col>
             <Col span={6}>
-              <Form.Item name="limit" label="Access Limit"><InputNumber min={0} style={{ width: '100%' }} tooltip="0 = Unlimited downloads" /></Form.Item>
+              <Form.Item name="limit" label={t.resources.modals.limitLabel}><InputNumber min={0} style={{ width: '100%' }} tooltip={t.resources.modals.limitTooltip} /></Form.Item>
             </Col>
 
             <Col span={24}>
-              <Form.Item name="description" label="Technical Description"><Input.TextArea rows={2} placeholder="Optional notes for other engineers..." /></Form.Item>
+              <Form.Item name="description" label={t.resources.modals.techDescLabel}><Input.TextArea rows={2} placeholder={t.resources.modals.techDescPlace} /> </Form.Item>
             </Col>
           </Row>
-          <Button type="primary" htmlType="submit" block size="large" icon={<UploadOutlined />}>Publish & Upload Resource</Button>
+          <Button type="primary" htmlType="submit" block size="large" icon={<UploadOutlined />}>{t.resources.modals.submit}</Button>
         </Form>
       </Modal>
 
-      <Modal title="Access Request Details" open={isClaimOpen} onCancel={() => setIsClaimOpen(false)} footer={null}>
+      <Modal title={t.claims.modals.title} open={isClaimOpen} onCancel={() => setIsClaimOpen(false)} footer={null}>
         <Form form={claimForm} layout="vertical" onFinish={handleClaimSubmit}>
           <div className="bg-slate-50 p-4 rounded-md mb-6 border border-slate-100">
             <Space direction="vertical" size={2}>
               <Text strong>{selectedResource?.name}</Text>
-              <Text type="secondary" style={{ fontSize: 12 }}>File: {selectedResource?.fileName}</Text>
+              <Text type="secondary" style={{ fontSize: 12 }}>{t.resources.columns.fileName}: {selectedResource?.fileName}</Text>
             </Space>
           </div>
-          <Form.Item name="borrowerName" label="Engineer Name" rules={[{ required: true }]}><Input prefix={<UserOutlined />} placeholder="e.g. Li Ming" /></Form.Item>
-          <Form.Item name="borrowerDept" label="Department / Team" rules={[{ required: true }]}><Input prefix={<ProjectOutlined />} placeholder="e.g. Data Platform Ops" /></Form.Item>
-          <Form.Item name="purpose" label="Purpose for Download" rules={[{ required: true }]}><Input.TextArea rows={2} placeholder="e.g. Accessing Alpha cluster for node maintenance (Ticket #1234)" /></Form.Item>
+          <Form.Item name="borrowerName" label={t.claims.modals.nameLabel} rules={[{ required: true }]}><Input prefix={<UserOutlined />} placeholder={t.claims.modals.namePlace} /></Form.Item>
+          <Form.Item name="borrowerDept" label={t.claims.modals.deptLabel}><Input prefix={<ProjectOutlined />} placeholder={t.common.optional} /></Form.Item>
+          <Form.Item name="purpose" label={t.claims.modals.purposeLabel}><Input.TextArea rows={2} placeholder={t.common.optional} /></Form.Item>
           <div style={{ background: '#fff7e6', border: '1px solid #ffd591', padding: 12, borderRadius: 8, marginBottom: 20 }}>
-            <Space align="start"><ExclamationCircleOutlined style={{ color: '#faad14', marginTop: 4 }} /><Text type="secondary" style={{ fontSize: 12 }}>This action will be logged in the system audit history. Please ensure compliance with security policies.</Text></Space>
+            <Space align="start"><ExclamationCircleOutlined style={{ color: '#faad14', marginTop: 4 }} /><Text type="secondary" style={{ fontSize: 12 }}>{t.claims.modals.warn}</Text></Space>
           </div>
-          <Button type="primary" htmlType="submit" block size="large" icon={<DownloadOutlined />}>Log Access & Download File</Button>
+          <Button type="primary" htmlType="submit" block size="large" icon={<DownloadOutlined />}>{t.claims.modals.submit}</Button>
         </Form>
       </Modal>
     </ConfigProvider>
