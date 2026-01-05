@@ -125,6 +125,39 @@ const server = http.createServer((req, res) => {
             res.end('Project not found');
         }
     }
+    // --- RENAME FILE ---
+    else if (req.url === '/api/rename' && req.method === 'POST') {
+        let body = [];
+        req.on('data', (chunk) => body.push(chunk));
+        req.on('end', () => {
+            try {
+                const data = JSON.parse(Buffer.concat(body).toString());
+                const { projectId, folderName, oldFileName, newFileName } = data;
+
+                if (!projectId || !folderName || !oldFileName || !newFileName) {
+                    res.writeHead(400);
+                    res.end(JSON.stringify({ error: 'Missing parameters' }));
+                    return;
+                }
+
+                const oldPath = path.join(UPLOADS_DIR, projectId, folderName, oldFileName);
+                const newPath = path.join(UPLOADS_DIR, projectId, folderName, newFileName);
+
+                if (!fs.existsSync(oldPath)) {
+                    res.writeHead(404);
+                    res.end(JSON.stringify({ error: 'Source file not found' }));
+                    return;
+                }
+
+                fs.renameSync(oldPath, newPath);
+                res.writeHead(200);
+                res.end(JSON.stringify({ success: true }));
+            } catch (err) {
+                res.writeHead(500);
+                res.end(JSON.stringify({ error: err.message }));
+            }
+        });
+    }
     else {
         res.writeHead(404);
         res.end('Not Found');

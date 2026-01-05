@@ -237,7 +237,7 @@ export default function App() {
           id: Math.random().toString(36).substr(2, 9),
           projectId: selectedProjectId,
           folderName: values.folderName,
-          name: isBatch ? file.name : (values.name || file.name),
+          name: values.name || '',
           type: values.type,
           description: values.description || '',
           totalQuantity: values.quantity,
@@ -269,9 +269,37 @@ export default function App() {
   const handleEditSubmit = useCallback(async (values: any) => {
     if (!selectedResource) return;
 
+    const oldFileName = selectedResource.fileName;
+    const newFileName = values.fileName;
+    const fileNameChanged = oldFileName !== newFileName;
+
+    if (fileNameChanged) {
+      try {
+        const renameRes = await fetch('http://localhost:3001/api/rename', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            projectId: selectedResource.projectId,
+            folderName: selectedResource.folderName,
+            oldFileName: oldFileName,
+            newFileName: newFileName
+          })
+        });
+
+        if (!renameRes.ok) {
+          const errData = await renameRes.json();
+          throw new Error(errData.error || 'Rename failed');
+        }
+      } catch (err: any) {
+        message.error(`File rename failed: ${err.message}`);
+        return;
+      }
+    }
+
     const updatedResource = {
       ...selectedResource,
-      name: values.name || selectedResource.fileName,
+      name: values.name || '',
+      fileName: newFileName,
       type: values.type,
       description: values.description,
       totalQuantity: values.quantity,
@@ -285,7 +313,7 @@ export default function App() {
     setIsEditOpen(false);
     setSelectedResource(null);
     editForm.resetFields();
-  }, [selectedResource, editForm, t]);
+  }, [selectedResource, editForm, t, resources]);
 
   const handleUpdateDescription = useCallback(async (resourceId: string, newDesc: string) => {
     const resource = resources.find(r => r.id === resourceId);
@@ -572,7 +600,7 @@ export default function App() {
                           </div>
                           <div>
                             <Space align="center" size={8}>
-                              <Text style={{ color: 'white', fontWeight: 600, fontSize: 14 }}>{res.name}</Text>
+                              <Text style={{ color: 'white', fontWeight: 600, fontSize: 14 }}>{res.fileName}</Text>
                               <Tag size="small" color="emerald" style={{ fontSize: 10, margin: 0, opacity: 0.8, background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.2)', color: '#b7eb8f' }}>
                                 {res.resourceType}
                               </Tag>
@@ -581,9 +609,14 @@ export default function App() {
                               <span className="text-blue-300/80">{res.projectName}</span>
                               <span className="mx-1">/</span>
                               <span>{res.folderName}</span>
-                              <span className="ml-2 px-1.5 py-0.5 bg-black/20 rounded text-[10px] font-mono opacity-60">
-                                {res.fileName}
-                              </span>
+                              {res.name && (
+                                <>
+                                  <span className="mx-1">•</span>
+                                  <span className="bg-white/10 px-1.5 rounded text-[10px] text-white/80">
+                                    {res.name}
+                                  </span>
+                                </>
+                              )}
                             </div>
                           </div>
                         </Space>
@@ -673,12 +706,15 @@ export default function App() {
               className="custom-table"
               columns={[
                 {
-                  title: t.resources.columns.name,
-                  key: 'name',
-                  render: (_, r) => (
+                  title: t.resources.columns.fileName,
+                  dataIndex: 'fileName',
+                  key: 'fileName',
+                  width: 180,
+                  ellipsis: true,
+                  render: (name) => (
                     <Space>
                       <FileTextOutlined className="text-blue-500" />
-                      <Text strong>{r.name}</Text>
+                      <Text strong>{name}</Text>
                     </Space>
                   )
                 },
@@ -699,12 +735,11 @@ export default function App() {
                   }
                 },
                 {
-                  title: t.resources.columns.fileName,
-                  dataIndex: 'fileName',
-                  key: 'fileName',
+                  title: t.resources.columns.name,
+                  key: 'name',
                   width: 150,
                   ellipsis: true,
-                  render: (name) => <Text type="secondary" style={{ fontSize: 12 }}>{name}</Text>
+                  render: (_, r) => <Text type={r.name ? 'reset' : 'secondary'} style={{ fontSize: 13 }}>{r.name || '-'}</Text>
                 },
                 {
                   title: t.resources.columns.stock,
@@ -799,6 +834,7 @@ export default function App() {
                           onClick={() => {
                             setSelectedResource(r);
                             editForm.setFieldsValue({
+                              fileName: r.fileName,
                               name: r.name,
                               type: r.type,
                               quantity: r.totalQuantity,
@@ -1108,6 +1144,11 @@ export default function App() {
       <Modal title={t.resources.modals.editTitle} open={isEditOpen} onCancel={() => setIsEditOpen(false)} footer={null} width={700}>
         <Form form={editForm} layout="vertical" onFinish={handleEditSubmit}>
           <Row gutter={24}>
+            <Col span={12}>
+              <Form.Item name="fileName" label={t.resources.columns.fileName} rules={[{ required: true }]}>
+                <Input placeholder="config.ovpn" />
+              </Form.Item>
+            </Col>
             <Col span={12}>
               <Form.Item name="name" label={t.resources.modals.nameLabel}>
                 <Input placeholder={t.common.optional} />
