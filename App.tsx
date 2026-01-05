@@ -74,74 +74,6 @@ const { Header, Content, Footer } = Layout;
 const { Title, Text, Paragraph } = Typography;
 const { Dragger } = Upload;
 
-// --- CONSTANTS ---
-const MOCK_PROJECTS: Project[] = [
-  {
-    id: 'p1',
-    name: 'Production Cluster Alpha',
-    description: 'Core Hadoop/Spark cluster for real-time analytics pipeline.',
-    manager: 'Zhang Wei',
-    status: 'active',
-    createdAt: '2024-01-15',
-  },
-  {
-    id: 'p2',
-    name: 'Dev-Stage Environment',
-    description: 'Internal testing and staging for new data models.',
-    manager: 'Li Na',
-    status: 'active',
-    createdAt: '2024-02-10',
-  }
-];
-
-const MOCK_FOLDERS: Folder[] = [
-  { id: 'f1', projectId: 'p1', name: 'VPN_Configs' },
-  { id: 'f2', projectId: 'p1', name: 'Cluster_Specs' },
-  { id: 'f3', projectId: 'p2', name: 'VPN_Configs' }
-];
-
-const MOCK_RESOURCES: Resource[] = [
-  {
-    id: 'r1',
-    projectId: 'p1',
-    folderName: 'VPN_Configs',
-    name: 'Ops-Admin-Access.ovpn',
-    type: ResourceType.CONFIG,
-    description: 'Admin level OpenVPN profile for Production Cluster Alpha.',
-    totalQuantity: 50,
-    availableQuantity: 45,
-    maxClaimsPerUser: 1,
-    fileName: 'admin_prod.ovpn',
-    createdAt: '2024-01-20',
-  },
-  {
-    id: 'r2',
-    projectId: 'p1',
-    folderName: 'Cluster_Specs',
-    name: 'core-site.xml',
-    type: ResourceType.CONFIG,
-    description: 'Hadoop core configuration for HDFS access.',
-    totalQuantity: 100,
-    availableQuantity: 98,
-    maxClaimsPerUser: 0,
-    fileName: 'core-site.xml',
-    createdAt: '2024-01-22',
-  },
-  {
-    id: 'r3',
-    projectId: 'p2',
-    folderName: 'VPN_Configs',
-    name: 'Developer-Sandbox.ovpn',
-    type: ResourceType.CONFIG,
-    description: 'Standard developer access for Dev-Stage environment.',
-    totalQuantity: 200,
-    availableQuantity: 150,
-    maxClaimsPerUser: 1,
-    fileName: 'dev_sandbox.ovpn',
-    createdAt: '2024-02-15',
-  }
-];
-
 // --- APP COMPONENT ---
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -158,7 +90,6 @@ export default function App() {
     const initData = async () => {
       try {
         await StorageService.initDB();
-        await StorageService.seedDatabase(MOCK_PROJECTS, MOCK_FOLDERS, MOCK_RESOURCES);
 
         const [loadedProjects, loadedFolders, loadedResources, loadedClaims] = await Promise.all([
           StorageService.getAll<Project>(StorageService.STORES.PROJECTS),
@@ -240,14 +171,13 @@ export default function App() {
       r.id === selectedResource.id ? updatedResource : r
     ));
 
-    const content = selectedResource.fileContent || `[Nexus Ops Logged Access]\nFile: ${selectedResource.name}\nRequested by: ${borrowerName}\nTimestamp: ${new Date().toLocaleString()}`;
-    const blob = new Blob([content], { type: 'text/plain' });
-    const url = window.URL.createObjectURL(blob);
+    // Download from physical storage server (Hierarchical path)
     const a = document.createElement('a');
-    a.href = url;
+    a.href = `http://localhost:3001/api/files/${selectedResource.projectId}/${selectedResource.folderName}/${selectedResource.fileName}`;
     a.download = selectedResource.fileName;
+    document.body.appendChild(a);
     a.click();
-    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
 
     message.success(t.claims.modals.success);
     setIsClaimOpen(false);
@@ -261,14 +191,46 @@ export default function App() {
       return;
     }
 
-    const file = uploadFileList[0].originFileObj;
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      const content = e.target?.result as string;
+    if (!selectedProjectId) {
+      message.error('Project context lost. Please refresh.');
+      return;
+    }
 
+    const file = uploadFileList[0].originFileObj;
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      // 1. Upload to physical storage server
+      const uploadRes = await fetch('http://localhost:3001/api/upload', {
+        method: 'POST',
+        headers: {
+          'x-project-id': encodeURIComponent(selectedProjectId),
+          'x-folder-name': encodeURIComponent(values.folderName),
+        },
+        body: formData,
+      });
+
+      if (!uploadRes.ok) {
+        const errorText = await uploadRes.text();
+        throw new Error(errorText || 'Server Error');
+      }
+
+      const uploadData = await uploadRes.json();
+      if (!uploadData.success) throw new Error('Upload failed');
+
+      // 2. Read file content for preview & metadata
+      const content = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => resolve(e.target?.result as string);
+        reader.onerror = (e) => reject(new Error('Failed to read file'));
+        reader.readAsText(file);
+      });
+
+      // 3. Persist to IndexedDB
       const newResource: Resource = {
         id: Math.random().toString(36).substr(2, 9),
-        projectId: selectedProjectId!,
+        projectId: selectedProjectId,
         folderName: values.folderName,
         name: values.name || file.name,
         type: values.type,
@@ -289,8 +251,10 @@ export default function App() {
       setIsUploadOpen(false);
       setUploadFileList([]);
       uploadForm.resetFields();
-    };
-    reader.readAsText(file);
+    } catch (err: any) {
+      console.error('Upload Error:', err);
+      message.error(`${t.resources.modals.error}: ${err.message || 'Unknown Error'}`);
+    }
   }, [selectedProjectId, uploadForm, uploadFileList, t]);
 
   const handleCreateProject = useCallback(async (values: any) => {
@@ -324,17 +288,36 @@ export default function App() {
   }, [selectedProjectId, folders, folderForm, t]);
 
   const handleDeleteResource = useCallback(async (resourceId: string) => {
+    const resToDelete = resources.find(r => r.id === resourceId);
+    if (resToDelete) {
+      try {
+        await fetch(`http://localhost:3001/api/files/${resToDelete.projectId}/${resToDelete.folderName}/${resToDelete.fileName}`, {
+          method: 'DELETE'
+        });
+      } catch (e) {
+        console.error('Failed to delete physical file:', e);
+      }
+    }
+
     await StorageService.remove(StorageService.STORES.RESOURCES, resourceId);
     setResources(prev => prev.filter(r => r.id !== resourceId));
     message.success(t.resources.deleteSuccess);
-  }, [t]);
+  }, [t, resources]);
 
   const handleDeleteFolder = useCallback(async (projectId: string, folderName: string) => {
-    // Delete folder entry from DB
+    // 1. Delete physical folder
+    try {
+      await fetch(`http://localhost:3001/api/folders/${projectId}/${folderName}`, {
+        method: 'DELETE'
+      });
+    } catch (e) {
+      console.error('Failed to delete physical folder:', e);
+    }
+
+    // 2. Delete metadata
     const folder = folders.find(f => f.projectId === projectId && f.name === folderName);
     if (folder) await StorageService.remove(StorageService.STORES.FOLDERS, folder.id);
 
-    // Filter resources to delete
     const resourcesToDelete = resources.filter(r => r.projectId === projectId && r.folderName === folderName);
     for (const r of resourcesToDelete) {
       await StorageService.remove(StorageService.STORES.RESOURCES, r.id);
@@ -346,9 +329,18 @@ export default function App() {
   }, [folders, resources, t]);
 
   const handleDeleteProject = useCallback(async (projectId: string) => {
+    // 1. Delete physical project folder
+    try {
+      await fetch(`http://localhost:3001/api/projects/${projectId}`, {
+        method: 'DELETE'
+      });
+    } catch (e) {
+      console.error('Failed to delete physical project:', e);
+    }
+
+    // 2. Delete metadata
     await StorageService.remove(StorageService.STORES.PROJECTS, projectId);
 
-    // Cascade delete folders and resources
     const projectFolders = folders.filter(f => f.projectId === projectId);
     for (const f of projectFolders) await StorageService.remove(StorageService.STORES.FOLDERS, f.id);
 
@@ -793,7 +785,9 @@ export default function App() {
             </Col>
 
             <Col span={24}>
-              <Form.Item name="description" label={t.resources.modals.techDescLabel}><Input.TextArea rows={2} placeholder={t.resources.modals.techDescPlace} /> </Form.Item>
+              <Form.Item name="description" label={t.resources.modals.techDescLabel}>
+                <Input.TextArea rows={2} placeholder={t.resources.modals.techDescPlace} />
+              </Form.Item>
             </Col>
           </Row>
           <Button type="primary" htmlType="submit" block size="large" icon={<UploadOutlined />}>{t.resources.modals.submit}</Button>
@@ -808,9 +802,15 @@ export default function App() {
               <Text type="secondary" style={{ fontSize: 12 }}>{t.resources.columns.fileName}: {selectedResource?.fileName}</Text>
             </Space>
           </div>
-          <Form.Item name="borrowerName" label={t.claims.modals.nameLabel} rules={[{ required: true }]}><Input prefix={<UserOutlined />} placeholder={t.claims.modals.namePlace} /></Form.Item>
-          <Form.Item name="borrowerDept" label={t.claims.modals.deptLabel}><Input prefix={<ProjectOutlined />} placeholder={t.common.optional} /></Form.Item>
-          <Form.Item name="purpose" label={t.claims.modals.purposeLabel}><Input.TextArea rows={2} placeholder={t.common.optional} /></Form.Item>
+          <Form.Item name="borrowerName" label={t.claims.modals.nameLabel} rules={[{ required: true }]}>
+            <Input prefix={<UserOutlined />} placeholder={t.claims.modals.namePlace} />
+          </Form.Item>
+          <Form.Item name="borrowerDept" label={t.claims.modals.deptLabel}>
+            <Input prefix={<ProjectOutlined />} placeholder={t.common.optional} />
+          </Form.Item>
+          <Form.Item name="purpose" label={t.claims.modals.purposeLabel}>
+            <Input.TextArea rows={2} placeholder={t.common.optional} />
+          </Form.Item>
           <div style={{ background: '#fff7e6', border: '1px solid #ffd591', padding: 12, borderRadius: 8, marginBottom: 20 }}>
             <Space align="start"><ExclamationCircleOutlined style={{ color: '#faad14', marginTop: 4 }} /><Text type="secondary" style={{ fontSize: 12 }}>{t.claims.modals.warn}</Text></Space>
           </div>

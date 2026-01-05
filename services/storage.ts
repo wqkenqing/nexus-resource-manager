@@ -100,36 +100,11 @@ export const remove = async (storeName: string, id: string): Promise<void> => {
     });
 };
 
-// Seed utility
-export const seedDatabase = async (
-    projects: Project[],
-    folders: Folder[],
-    resources: Resource[]
-) => {
-    const db = await getDB();
-
-    // Check if empty
-    const currentProjects = await getAll<Project>(STORES.PROJECTS);
-    if (currentProjects.length > 0) return; // Already seeded
-
-    const tx = db.transaction([STORES.PROJECTS, STORES.FOLDERS, STORES.RESOURCES], 'readwrite');
-
-    projects.forEach(p => tx.objectStore(STORES.PROJECTS).add(p));
-    folders.forEach(f => tx.objectStore(STORES.FOLDERS).add(f));
-    resources.forEach(r => tx.objectStore(STORES.RESOURCES).add(r));
-
-    return new Promise<void>((resolve, reject) => {
-        tx.oncomplete = () => resolve();
-        tx.onerror = () => reject(tx.error);
-    });
-};
-
 export const StorageService = {
     STORES,
     initDB,
     getAll,
     add,
     update,
-    remove,
-    seedDatabase
+    remove
 };
