@@ -50,7 +50,8 @@ import {
   LineChartOutlined,
   FolderAddOutlined,
   DeleteOutlined,
-  EditOutlined
+  EditOutlined,
+  ArrowRightOutlined
 } from '@ant-design/icons';
 import {
   BarChart,
@@ -116,8 +117,8 @@ export default function App() {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [inlineEditingId, setInlineEditingId] = useState<string | null>(null);
 
-  const [aiLoading, setAiLoading] = useState(false);
-  const [aiResponse, setAiResponse] = useState<string | null>(null);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [searchResults, setSearchResults] = useState<any[]>([]);
 
   // Modal States
   const [isUploadOpen, setIsUploadOpen] = useState(false);
@@ -138,8 +139,7 @@ export default function App() {
   const stats = useMemo(() => ({
     totalProjects: projects.length,
     totalResources: resources.length,
-    activeClaims: claims.length,
-    outOfStockItems: resources.filter(r => r.availableQuantity === 0).length
+    activeClaims: claims.length
   }), [projects, resources, claims]);
 
   const handleClaimSubmit = useCallback(async (values: any) => {
@@ -390,7 +390,6 @@ export default function App() {
 
     const projectResources = resources.filter(r => r.projectId === projectId);
     for (const r of projectResources) await StorageService.remove(StorageService.STORES.RESOURCES, r.id);
-
     setProjects(prev => prev.filter(p => p.id !== projectId));
     setFolders(prev => prev.filter(f => f.projectId !== projectId));
     setResources(prev => prev.filter(r => r.projectId !== projectId));
@@ -400,26 +399,102 @@ export default function App() {
     }
   }, [selectedProjectId, folders, resources, t]);
 
-  const handleAiSearch = useCallback(async (q: string) => {
-    if (!q) return;
-    setAiLoading(true);
-    try {
-      const res = await getResourceAssistantResponse(q, projects, resources);
-      setAiResponse(res || "I couldn't find an answer for that.");
-    } catch (err) {
-      message.error("AI Assistant is temporarily unavailable.");
-    } finally {
-      setAiLoading(false);
+  const handleQuickSearch = useCallback((q: string) => {
+    const rawQuery = q.trim();
+    if (!rawQuery) {
+      setSearchResults([]);
+      return;
     }
+    setSearchLoading(true);
+
+    const terms = rawQuery.toLowerCase().split(/\s+/).filter(Boolean);
+    const results: any[] = [];
+
+    // Helper: Calculate match score for an item
+    const calculateScore = (target: string, queryTerms: string[]) => {
+      let score = 0;
+      const lowerTarget = target.toLowerCase();
+
+      queryTerms.forEach(term => {
+        if (lowerTarget === term) score += 100; // Exact match
+        else if (lowerTarget.split('.').includes(term)) score += 80; // File segment match
+        else if (lowerTarget.startsWith(term)) score += 40; // Prefix match
+        else if (lowerTarget.includes(term)) score += 15; // Contains match
+      });
+      return score;
+    };
+
+    // 1. Search Projects
+    projects.forEach(p => {
+      const nameScore = calculateScore(p.name, terms);
+      const descScore = calculateScore(p.description || '', terms);
+      let matchCount = 0;
+      terms.forEach(t => {
+        if (p.name.toLowerCase().includes(t) || (p.description && p.description.toLowerCase().includes(t))) {
+          matchCount++;
+        }
+      });
+
+      const totalScore = nameScore + (descScore * 0.5) + (matchCount === terms.length ? 150 : 0);
+
+      if (totalScore > 0 && matchCount >= (terms.length > 1 ? terms.length - 1 : 1)) {
+        results.push({
+          type: 'project',
+          id: p.id,
+          name: p.name,
+          desc: p.description,
+          score: totalScore
+        });
+      }
+    });
+
+    // 2. Search Resources
+    resources.forEach(r => {
+      const nameScore = calculateScore(r.name, terms);
+      const fileScore = calculateScore(r.fileName, terms);
+      const descScore = calculateScore(r.description || '', terms);
+      const typeScore = terms.some(t => r.type.toLowerCase().includes(t)) ? 40 : 0;
+
+      let matchCount = 0;
+      terms.forEach(t => {
+        if (r.name.toLowerCase().includes(t) || r.fileName.toLowerCase().includes(t) || r.type.toLowerCase().includes(t) || (r.description && r.description.toLowerCase().includes(t))) {
+          matchCount++;
+        }
+      });
+
+      // Special check for extensions
+      const fileExt = r.fileName.split('.').pop()?.toLowerCase();
+      const hasExtMatch = fileExt && terms.some(t => t === fileExt || t === `.${fileExt}`);
+
+      const totalScore = nameScore + fileScore + (descScore * 0.3) + typeScore + (hasExtMatch ? 120 : 0) + (matchCount === terms.length ? 200 : 0);
+
+      if (totalScore > 0 && matchCount >= (terms.length > 1 ? Math.floor(terms.length * 0.6) : 1)) {
+        const project = projects.find(p => p.id === r.projectId);
+        results.push({
+          type: 'resource',
+          id: r.id,
+          name: r.name,
+          fileName: r.fileName,
+          projectId: r.projectId,
+          folderName: r.folderName,
+          projectName: project?.name || 'Unknown',
+          resourceType: r.type,
+          score: totalScore
+        });
+      }
+    });
+
+    results.sort((a, b) => b.score - a.score);
+    setSearchResults(results.slice(0, 30));
+    setSearchLoading(false);
   }, [projects, resources]);
 
   const renderDashboard = () => (
     <Space direction="vertical" size="large" style={{ width: '100%' }}>
       <Row gutter={[24, 24]}>
-        <Col xs={24} sm={12} lg={6}><Card bordered={false}><Statistic title={t.stats.projects} value={stats.totalProjects} prefix={<ProjectOutlined className="text-blue-500" />} /></Card></Col>
-        <Col xs={24} sm={12} lg={6}><Card bordered={false}><Statistic title={t.stats.resources} value={stats.totalResources} prefix={<FileTextOutlined className="text-indigo-500" />} /></Card></Col>
-        <Col xs={24} sm={12} lg={6}><Card bordered={false}><Statistic title={t.stats.claims} value={stats.activeClaims} prefix={<DownloadOutlined className="text-emerald-500" />} /></Card></Col>
-        <Col xs={24} sm={12} lg={6}><Card bordered={false}><Statistic title={t.stats.missing} value={stats.outOfStockItems} valueStyle={{ color: stats.outOfStockItems > 0 ? '#ff4d4f' : '#52c41a' }} prefix={<ExclamationCircleOutlined />} /></Card></Col>
+        <Col xs={24} sm={12} lg={8}><Card bordered={false}><Statistic title={t.stats.projects} value={stats.totalProjects} prefix={<ProjectOutlined className="text-blue-500" />} /></Card></Col>
+        <Col xs={24} sm={12} lg={8}><Card bordered={false}><Statistic title={t.stats.resources} value={stats.totalResources} prefix={<FileTextOutlined className="text-indigo-500" />} /></Card></Col>
+        <Col xs={24} sm={12} lg={8}><Card bordered={false}><Statistic title={t.stats.claims} value={stats.activeClaims} prefix={<DownloadOutlined className="text-emerald-500" />} /></Card></Col>
       </Row>
       <Card bordered={false} style={{ background: 'linear-gradient(135deg, #1677ff 0%, #722ed1 100%)', color: 'white' }}>
         <Title level={3} style={{ color: 'white', marginTop: 0 }}>{t.ai.title}</Title>
@@ -428,10 +503,104 @@ export default function App() {
           placeholder={t.ai.placeholder}
           enterButton={t.ai.button}
           size="large"
-          loading={aiLoading}
-          onSearch={handleAiSearch}
+          loading={searchLoading}
+          onSearch={handleQuickSearch}
+          allowClear
         />
-        {aiResponse && <div style={{ marginTop: 20, padding: 16, background: 'rgba(255,255,255,0.1)', borderRadius: 8 }}>{aiResponse}</div>}
+        {searchResults.length > 0 && (
+          <div style={{ marginTop: 24, padding: '20px', background: 'rgba(255,255,255,0.08)', borderRadius: 16, border: '1px solid rgba(255,255,255,0.1)', maxHeight: 500, overflowY: 'auto' }}>
+            <div className="flex justify-between items-center mb-4">
+              <Title level={5} style={{ color: 'white', margin: 0 }}>
+                {t.ai.responseResult}
+              </Title>
+              <Badge count={searchResults.length} overflowCount={99} style={{ backgroundColor: '#52c41a', boxShadow: 'none' }} />
+            </div>
+
+            <Space direction="vertical" style={{ width: '100%' }} size="middle">
+              {/* Projects Group */}
+              {searchResults.some(r => r.type === 'project') && (
+                <div>
+                  <div className="text-white/40 text-[10px] uppercase tracking-wider mb-2 font-bold px-2">{t.menu.projects}</div>
+                  <Space direction="vertical" style={{ width: '100%' }} size="small">
+                    {searchResults.filter(r => r.type === 'project').map((res, idx) => (
+                      <div
+                        key={`p-${idx}`}
+                        className="p-3 bg-white/5 hover:bg-white/10 rounded-xl cursor-pointer transition-all flex items-center justify-between group border border-transparent hover:border-white/10"
+                        onClick={() => {
+                          setActiveTab('projects');
+                          setSelectedProjectId(res.id);
+                        }}
+                      >
+                        <Space size="middle">
+                          <div className="p-2 bg-blue-500/20 rounded-lg">
+                            <ProjectOutlined style={{ color: '#69c0ff', fontSize: 18 }} />
+                          </div>
+                          <div>
+                            <Text style={{ color: 'white', fontWeight: 600, fontSize: 14 }}>{res.name}</Text>
+                            {res.desc && (
+                              <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12 }} className="truncate max-w-[400px]">
+                                {res.desc}
+                              </div>
+                            )}
+                          </div>
+                        </Space>
+                        <ArrowRightOutlined className="opacity-0 group-hover:opacity-100 transition-opacity text-white/50" />
+                      </div>
+                    ))}
+                  </Space>
+                </div>
+              )}
+
+              {/* Resources Group */}
+              {searchResults.some(r => r.type === 'resource') && (
+                <div style={{ marginTop: 8 }}>
+                  <div className="text-white/40 text-[10px] uppercase tracking-wider mb-2 font-bold px-2">{t.stats.resources}</div>
+                  <Space direction="vertical" style={{ width: '100%' }} size="small">
+                    {searchResults.filter(r => r.type === 'resource').map((res, idx) => (
+                      <div
+                        key={`r-${idx}`}
+                        className="p-3 bg-emerald-500/5 hover:bg-emerald-500/10 rounded-xl cursor-pointer transition-all flex items-center justify-between group border border-transparent hover:border-emerald-500/20"
+                        onClick={() => {
+                          setActiveTab('projects');
+                          setSelectedProjectId(res.projectId);
+                          setSelectedFolderName(res.folderName);
+                        }}
+                      >
+                        <Space size="middle">
+                          <div className="p-2 bg-emerald-500/20 rounded-lg">
+                            <FileTextOutlined style={{ color: '#b7eb8f', fontSize: 18 }} />
+                          </div>
+                          <div>
+                            <Space align="center" size={8}>
+                              <Text style={{ color: 'white', fontWeight: 600, fontSize: 14 }}>{res.name}</Text>
+                              <Tag size="small" color="emerald" style={{ fontSize: 10, margin: 0, opacity: 0.8, background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.2)', color: '#b7eb8f' }}>
+                                {res.resourceType}
+                              </Tag>
+                            </Space>
+                            <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12 }}>
+                              <span className="text-blue-300/80">{res.projectName}</span>
+                              <span className="mx-1">/</span>
+                              <span>{res.folderName}</span>
+                              <span className="ml-2 px-1.5 py-0.5 bg-black/20 rounded text-[10px] font-mono opacity-60">
+                                {res.fileName}
+                              </span>
+                            </div>
+                          </div>
+                        </Space>
+                        <ArrowRightOutlined className="opacity-0 group-hover:opacity-100 transition-opacity text-white/50" />
+                      </div>
+                    ))}
+                  </Space>
+                </div>
+              )}
+            </Space>
+          </div>
+        )}
+        {searchResults.length === 0 && searchLoading === false && (
+          <div style={{ marginTop: 12 }}>
+            <Text style={{ color: 'rgba(255,255,255,0.5)' }}>{t.ai.noAnswer}</Text>
+          </div>
+        )}
       </Card>
     </Space>
   );

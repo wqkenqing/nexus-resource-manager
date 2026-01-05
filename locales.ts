@@ -25,17 +25,16 @@ export const translations = {
         stats: {
             projects: "Managed Projects",
             resources: "Total Config Files",
-            claims: "Downloads Logged",
-            missing: "Missing Configs"
+            claims: "Downloads Logged"
         },
         ai: {
-            title: "Infrastructure AI Assistant",
-            desc: "Query environment configurations or check cross-project resource distribution.",
-            placeholder: "e.g., Which projects have OpenVPN configs?",
-            button: "Ask Ops AI",
-            unavailable: "AI Assistant is temporarily unavailable.",
-            noAnswer: "I couldn't find an answer for that.",
-            responseResult: "AI Response"
+            title: "Quick Access Finder",
+            desc: "Locate environment configs by searching tags, filenames, or projects.",
+            placeholder: "Search resources...",
+            button: "Find Now",
+            unavailable: "Search is initializing...",
+            noAnswer: "No matching resources found.",
+            responseResult: "Search Results"
         },
         projects: {
             title: "Environments Directory",
@@ -170,17 +169,16 @@ export const translations = {
         stats: {
             projects: "管理项目数",
             resources: "配置文件总数",
-            claims: "累计下载次数",
-            missing: "缺货项目"
+            claims: "累计下载次数"
         },
         ai: {
-            title: "基础架构 AI 助手",
-            desc: "查询环境配置信息或检查跨项目的资源分布情况。",
-            placeholder: "例如：哪些项目包含 OpenVPN 配置？",
-            button: "询问 AI",
-            unavailable: "AI 助手暂时不可用。",
-            noAnswer: "我找不到相关的答案。",
-            responseResult: "AI 回复"
+            title: "资源快速访达",
+            desc: "输入资源标签、文件名或项目名称，快速定位并跳转到目标位置。",
+            placeholder: "输入关键词搜索...",
+            button: "立即查找",
+            unavailable: "搜索系统正在初始化...",
+            noAnswer: "未找到匹配的资源或项目。",
+            responseResult: "搜索结果"
         },
         projects: {
             title: "环境目录",
