@@ -1,0 +1,7 @@
+{
+  "name": "Nexus Resource Manager",
+  "description": "A high-performance project-based shared resource management system with intelligent tracking, configurable claim limits, and detailed borrower logging.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
