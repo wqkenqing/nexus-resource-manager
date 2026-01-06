@@ -52,8 +52,12 @@ import {
   DeleteOutlined,
   EditOutlined,
   ArrowRightOutlined,
-  ShareAltOutlined
+  ShareAltOutlined,
+  SettingOutlined,
+  CloudUploadOutlined,
+  CloudDownloadOutlined
 } from '@ant-design/icons';
+const API_BASE = `http://${window.location.hostname}:3001`;
 import {
   BarChart,
   Bar,
@@ -197,7 +201,7 @@ export default function App() {
     const encodedPid = encodeURIComponent(selectedResource.projectId);
     const encodedFid = encodeURIComponent(selectedResource.folderName);
     const encodedFname = encodeURIComponent(selectedResource.fileName);
-    a.href = `http://localhost:3001/api/files/${encodedPid}/${encodedFid}/${encodedFname}`;
+    a.href = `${API_BASE}/api/files/${encodedPid}/${encodedFid}/${encodedFname}`;
     a.download = selectedResource.fileName;
     document.body.appendChild(a);
     a.click();
@@ -234,7 +238,7 @@ export default function App() {
         formData.append('file', file);
 
         // 1. Upload to physical storage server
-        const uploadRes = await fetch('http://localhost:3001/api/upload', {
+        const uploadRes = await fetch(`${API_BASE}/api/upload`, {
           method: 'POST',
           headers: {
             'x-project-id': encodeURIComponent(selectedProjectId),
@@ -296,7 +300,7 @@ export default function App() {
 
     if (fileNameChanged) {
       try {
-        const renameRes = await fetch('http://localhost:3001/api/rename', {
+        const renameRes = await fetch(`${API_BASE}/api/rename`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -384,7 +388,7 @@ export default function App() {
         const encodedProjectId = encodeURIComponent(resToDelete.projectId);
         const encodedFolderName = encodeURIComponent(resToDelete.folderName);
         const encodedFileName = encodeURIComponent(resToDelete.fileName);
-        await fetch(`http://localhost:3001/api/files/${encodedProjectId}/${encodedFolderName}/${encodedFileName}`, {
+        await fetch(`${API_BASE}/api/files/${encodedProjectId}/${encodedFolderName}/${encodedFileName}`, {
           method: 'DELETE'
         });
       } catch (e) {
@@ -400,7 +404,7 @@ export default function App() {
   const handleDeleteFolder = useCallback(async (projectId: string, folderName: string) => {
     // 1. Delete physical folder
     try {
-      await fetch(`http://localhost:3001/api/folders/${encodeURIComponent(projectId)}/${encodeURIComponent(folderName)}`, {
+      await fetch(`${API_BASE}/api/folders/${encodeURIComponent(projectId)}/${encodeURIComponent(folderName)}`, {
         method: 'DELETE'
       });
     } catch (e) {
@@ -424,7 +428,7 @@ export default function App() {
   const handleDeleteProject = useCallback(async (projectId: string) => {
     // 1. Delete physical project folder
     try {
-      await fetch(`http://localhost:3001/api/projects/${encodeURIComponent(projectId)}`, {
+      await fetch(`${API_BASE}/api/projects/${encodeURIComponent(projectId)}`, {
         method: 'DELETE'
       });
     } catch (e) {
@@ -450,12 +454,108 @@ export default function App() {
 
   const handleShare = useCallback((resourceId: string) => {
     const url = `${window.location.origin}${window.location.pathname}?share=${resourceId}`;
-    navigator.clipboard.writeText(url).then(() => {
+
+    // Polyfill/Fallback for clipboard in insecure contexts (HTTP + IP)
+    const performCopy = (text: string) => {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text);
+      } else {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        textArea.style.top = "0";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+          const successful = document.execCommand('copy');
+          document.body.removeChild(textArea);
+          return successful ? Promise.resolve() : Promise.reject(new Error('Copy failed'));
+        } catch (err) {
+          document.body.removeChild(textArea);
+          return Promise.reject(err);
+        }
+      }
+    };
+
+    performCopy(url).then(() => {
       message.success(lang === 'zh' ? '分享链接已复制到剪切板' : 'Share link copied to clipboard!');
     }).catch(err => {
-      message.error(lang === 'zh' ? '复制失败' : 'Failed to copy link');
+      console.error('Clipboard error:', err);
+      message.error(lang === 'zh' ? '复制失败，请手动复制 URL' : 'Copy failed, please copy URL manually');
     });
   }, [lang]);
+
+  const handleExportData = useCallback(async () => {
+    const allData = {
+      projects,
+      folders,
+      resources,
+      claims,
+      exportDate: new Date().toISOString(),
+      version: "1.0"
+    };
+    const blob = new Blob([JSON.stringify(allData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = t.system.exportFilename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    message.success(lang === 'zh' ? '元数据导出成功' : 'Metadata exported successfully');
+  }, [projects, folders, resources, claims, t, lang]);
+
+  const handleImportData = useCallback(async (info: any) => {
+    const file = info.file;
+    if (!file) return;
+
+    const hide = message.loading(lang === 'zh' ? '由于数据正在恢复，请稍候...' : 'Restoring data, please wait...', 0);
+    try {
+      const text = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => resolve(e.target?.result as string);
+        reader.onerror = (e) => reject(e);
+        reader.readAsText(file);
+      });
+
+      const data = JSON.parse(text);
+      if (!data.projects || !data.folders || !data.resources || !data.claims) {
+        throw new Error('Invalid metadata format');
+      }
+
+      // 1. Clear existing IndexedDB data
+      const stores = [
+        StorageService.STORES.PROJECTS,
+        StorageService.STORES.FOLDERS,
+        StorageService.STORES.RESOURCES,
+        StorageService.STORES.CLAIMS
+      ];
+
+      for (const store of stores) {
+        const currentItems = await StorageService.getAll(store);
+        for (const item of currentItems) {
+          await StorageService.remove(store, (item as any).id);
+        }
+      }
+
+      // 2. Restore from backup
+      for (const p of data.projects) await StorageService.add(StorageService.STORES.PROJECTS, p);
+      for (const f of data.folders) await StorageService.add(StorageService.STORES.FOLDERS, f);
+      for (const r of data.resources) await StorageService.add(StorageService.STORES.RESOURCES, r);
+      for (const c of data.claims) await StorageService.add(StorageService.STORES.CLAIMS, c);
+
+      message.success(t.system.importSuccess);
+      setTimeout(() => window.location.reload(), 1500);
+    } catch (err: any) {
+      console.error('Import Error:', err);
+      message.error(t.system.importError);
+    } finally {
+      hide();
+    }
+  }, [t, lang]);
 
   const handleQuickSearch = useCallback((q: string) => {
     const rawQuery = q.trim();
@@ -664,6 +764,40 @@ export default function App() {
             <Text style={{ color: 'rgba(255,255,255,0.5)' }}>{t.ai.noAnswer}</Text>
           </div>
         )}
+      </Card>
+
+      <Card bordered={false} title={<Space><SettingOutlined className="text-gray-500" /><span>{t.system.title}</span></Space>}>
+        <div className="flex flex-col md:flex-row gap-6 items-start">
+          <div className="flex-1">
+            <Paragraph type="secondary" style={{ fontSize: 13 }}>
+              {lang === 'zh' ?
+                '当您需要迁移系统或在不同服务器间同步配置元数据时，可以使用导出功能。注意：此操作仅导出项目/文件关联信息，物理文件需手动迁移 uploads 文件夹。' :
+                'Use the export function when migrating systems or syncing metadata. Note: This only exports metadata; physical files must be migrated manually by moving the uploads folder.'}
+            </Paragraph>
+            <Space size="middle">
+              <Button icon={<CloudDownloadOutlined />} onClick={handleExportData} type="primary" ghost>
+                {t.system.exportBtn}
+              </Button>
+              <Upload
+                accept=".json"
+                showUploadList={false}
+                beforeUpload={() => false}
+                onChange={handleImportData}
+              >
+                <Button icon={<CloudUploadOutlined />}>
+                  {t.system.importBtn}
+                </Button>
+              </Upload>
+            </Space>
+          </div>
+          <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 flex-none w-full md:w-64">
+            <Space direction="vertical" size={0}>
+              <Text className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Instance Info</Text>
+              <Text className="text-xs font-mono text-blue-600 truncate block w-full">API: {API_BASE}</Text>
+              <Text className="text-xs font-mono text-gray-500 block">Host: {window.location.hostname}</Text>
+            </Space>
+          </div>
+        </div>
       </Card>
     </Space>
   );

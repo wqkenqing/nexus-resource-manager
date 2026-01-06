@@ -144,6 +144,14 @@ export const translations = {
             key: 'Access Key',
             doc: 'Documentation',
             sample: 'Dataset'
+        },
+        system: {
+            title: "System Management",
+            exportBtn: "Export Metadata (JSON)",
+            importBtn: "Import Metadata",
+            importSuccess: "Data restored successfully. Application will reload.",
+            importError: "Invalid metadata file. Please check the format.",
+            exportFilename: "nexus_ops_metadata.json"
         }
     },
     zh: {
@@ -295,6 +303,14 @@ export const translations = {
             key: '私钥/密钥',
             doc: '运维文档',
             sample: '数据样例'
+        },
+        system: {
+            title: "系统管理与维护",
+            exportBtn: "导出元数据 (JSON)",
+            importBtn: "导入元数据",
+            importSuccess: "系统数据恢复成功，即将重新加载。",
+            importError: "导入文件格式非法或损坏。",
+            exportFilename: "nexus_元数据备份.json"
         }
     }
 };
