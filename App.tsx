@@ -89,6 +89,7 @@ export default function App() {
   const [resources, setResources] = useState<Resource[]>([]);
   const [claims, setClaims] = useState<ClaimRecord[]>([]);
   const [lang, setLang] = useState<'en' | 'zh'>('zh');
+  const [globalLoading, setGlobalLoading] = useState(true);
 
   const t = useMemo(() => translations[lang], [lang]);
 
@@ -126,6 +127,8 @@ export default function App() {
       } catch (error) {
         console.error("Failed to load data:", error);
         message.error("Failed to load persistent data.");
+      } finally {
+        setGlobalLoading(false);
       }
     };
     initData();
@@ -147,7 +150,7 @@ export default function App() {
   const [isEditOpen, setIsEditOpen] = useState(false);
 
   const [selectedResource, setSelectedResource] = useState<Resource | null>(null);
-  const [isStandaloneShare, setIsStandaloneShare] = useState(false);
+  const [isStandaloneShare, setIsStandaloneShare] = useState(!!new URLSearchParams(window.location.search).get('share'));
   const [claimSuccess, setClaimSuccess] = useState(false);
   const [uploadFileList, setUploadFileList] = useState<any[]>([]);
 
@@ -1351,6 +1354,31 @@ export default function App() {
       />
     </div>
   );
+
+  if (globalLoading) {
+    return (
+      <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#f8fafc' }}>
+        <div className="animate-bounce mb-8">
+          <SolutionOutlined style={{ fontSize: 64, color: '#1677ff' }} />
+        </div>
+        <Title level={4} style={{ margin: 0, fontWeight: 300, color: '#64748b' }}>
+          {isStandaloneShare ? 'Authenticating Resource Link...' : 'Nexus Ops Engine Starting...'}
+        </Title>
+        <div className="mt-4 w-48 bg-gray-100 h-1 rounded-full overflow-hidden">
+          <div className="bg-blue-500 h-full animate-progress-indefinite" style={{ width: '40%' }}></div>
+        </div>
+        <style>{`
+          @keyframes progress-indefinite {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(250%); }
+          }
+          .animate-progress-indefinite {
+            animation: progress-indefinite 1.5s infinite linear;
+          }
+        `}</style>
+      </div>
+    );
+  }
 
   if (isStandaloneShare) {
     return (
