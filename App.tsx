@@ -51,7 +51,8 @@ import {
   FolderAddOutlined,
   DeleteOutlined,
   EditOutlined,
-  ArrowRightOutlined
+  ArrowRightOutlined,
+  ShareAltOutlined
 } from '@ant-design/icons';
 import {
   BarChart,
@@ -104,6 +105,20 @@ export default function App() {
         setFolders(loadedFolders);
         setResources(loadedResources);
         setClaims(loadedClaims);
+
+        // Handle Deep Linking / Share URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const shareId = urlParams.get('share');
+        if (shareId) {
+          const sharedRes = loadedResources.find(r => r.id === shareId);
+          if (sharedRes && sharedRes.availableQuantity > 0) {
+            setSelectedResource(sharedRes);
+            setIsStandaloneShare(true);
+            setClaimSuccess(false);
+          } else if (sharedRes && sharedRes.availableQuantity === 0) {
+            message.warning(lang === 'zh' ? '该资源已无库存，无法申领' : 'Resource out of stock');
+          }
+        }
       } catch (error) {
         console.error("Failed to load data:", error);
         message.error("Failed to load persistent data.");
@@ -128,6 +143,8 @@ export default function App() {
   const [isEditOpen, setIsEditOpen] = useState(false);
 
   const [selectedResource, setSelectedResource] = useState<Resource | null>(null);
+  const [isStandaloneShare, setIsStandaloneShare] = useState(false);
+  const [claimSuccess, setClaimSuccess] = useState(false);
   const [uploadFileList, setUploadFileList] = useState<any[]>([]);
 
   const [uploadForm] = Form.useForm();
@@ -188,9 +205,13 @@ export default function App() {
 
     message.success(t.claims.modals.success);
     setIsClaimOpen(false);
-    setSelectedResource(null);
+    if (isStandaloneShare) {
+      setClaimSuccess(true);
+    } else {
+      setSelectedResource(null);
+    }
     claimForm.resetFields();
-  }, [selectedResource, claims, claimForm, t]);
+  }, [selectedResource, claims, claimForm, t, isStandaloneShare]);
 
   const handleUploadSubmit = useCallback(async (values: any) => {
     if (uploadFileList.length === 0) {
@@ -427,6 +448,15 @@ export default function App() {
     }
   }, [selectedProjectId, folders, resources, t]);
 
+  const handleShare = useCallback((resourceId: string) => {
+    const url = `${window.location.origin}${window.location.pathname}?share=${resourceId}`;
+    navigator.clipboard.writeText(url).then(() => {
+      message.success(lang === 'zh' ? '分享链接已复制到剪切板' : 'Share link copied to clipboard!');
+    }).catch(err => {
+      message.error(lang === 'zh' ? '复制失败' : 'Failed to copy link');
+    });
+  }, [lang]);
+
   const handleQuickSearch = useCallback((q: string) => {
     const rawQuery = q.trim();
     if (!rawQuery) {
@@ -652,32 +682,65 @@ export default function App() {
 
       return (
         <div className="animate-in slide-in-from-right-8 duration-500">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+          <div className="mb-6 flex flex-col gap-4">
             <Breadcrumb
+              className="text-sm"
               items={[
-                { title: <a onClick={() => { setSelectedProjectId(null); setSelectedFolderName(null); }}>{t.projects.breadcrumbs}</a> },
-                { title: <a onClick={() => setSelectedFolderName(null)}>{project?.name}</a> },
-                { title: <span className="font-semibold text-blue-600">{selectedFolderName}</span> }
+                {
+                  title: (
+                    <Space className="cursor-pointer hover:text-blue-600 transition-colors" onClick={() => { setSelectedProjectId(null); setSelectedFolderName(null); }}>
+                      <ProjectOutlined />
+                      <span>{t.projects.breadcrumbs}</span>
+                    </Space>
+                  )
+                },
+                {
+                  title: (
+                    <Space className="cursor-pointer hover:text-blue-600 transition-colors" onClick={() => setSelectedFolderName(null)}>
+                      <span>{project?.name}</span>
+                    </Space>
+                  )
+                },
+                { title: <span className="font-semibold text-blue-600 px-2 py-0.5 bg-blue-50 rounded-md">{selectedFolderName}</span> }
               ]}
             />
-            <Space>
-              <Button type="primary" icon={<UploadOutlined />} onClick={() => {
-                uploadForm.setFieldsValue({ folderName: selectedFolderName });
-                setIsUploadOpen(true);
-              }}>{t.folders.uploadBtn}</Button>
-              <Popconfirm
-                title={t.folders.deleteTitle}
-                description={t.folders.deleteDesc.replace('{name}', selectedFolderName)}
-                onConfirm={() => {
-                  handleDeleteFolder(selectedProjectId, selectedFolderName);
-                  setSelectedFolderName(null);
-                }}
-                okText={t.common.yes}
-                cancelText={t.common.no}
-              >
-                <Button danger icon={<DeleteOutlined />}>{t.folders.deleteBtn}</Button>
-              </Popconfirm>
-            </Space>
+
+            <div className="flex justify-between items-end">
+              <div>
+                <Title level={2} style={{ margin: 0, display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <FolderOpenOutlined className="text-amber-500" />
+                  {selectedFolderName}
+                </Title>
+                <Text type="secondary">{project?.name} / {selectedFolderName}</Text>
+              </div>
+              <Space size="middle">
+                <Button
+                  type="primary"
+                  size="large"
+                  icon={<UploadOutlined />}
+                  className="shadow-md hover:shadow-lg transition-all"
+                  onClick={() => {
+                    uploadForm.setFieldsValue({ folderName: selectedFolderName });
+                    setIsUploadOpen(true);
+                  }}
+                >
+                  {t.folders.uploadBtn}
+                </Button>
+                <Popconfirm
+                  title={t.folders.deleteTitle}
+                  description={t.folders.deleteDesc.replace('{name}', selectedFolderName)}
+                  onConfirm={() => {
+                    handleDeleteFolder(selectedProjectId, selectedFolderName);
+                    setSelectedFolderName(null);
+                  }}
+                  okText={t.common.yes}
+                  cancelText={t.common.no}
+                  okButtonProps={{ danger: true }}
+                >
+                  <Button danger ghost icon={<DeleteOutlined />}>{t.common.delete}</Button>
+                </Popconfirm>
+              </Space>
+            </div>
           </div>
 
           <Row gutter={16} style={{ marginBottom: 24 }}>
@@ -845,6 +908,15 @@ export default function App() {
                           }}
                         />
                       </AntTooltip>
+                      <AntTooltip title={r.availableQuantity === 0 ? (lang === 'zh' ? '无库存，不可分享' : 'Out of stock') : t.common.share}>
+                        <Button
+                          type="text"
+                          icon={<ShareAltOutlined />}
+                          disabled={r.availableQuantity === 0}
+                          className={r.availableQuantity === 0 ? '' : 'text-indigo-600 flex items-center justify-center'}
+                          onClick={() => handleShare(r.id)}
+                        />
+                      </AntTooltip>
                       <Popconfirm
                         title={t.resources.deleteTitle}
                         description={t.resources.deleteDesc}
@@ -876,51 +948,73 @@ export default function App() {
 
       return (
         <div className="animate-in slide-in-from-left-4 duration-500">
-          <Breadcrumb
-            items={[
-              { title: <a onClick={() => setSelectedProjectId(null)}>{t.projects.breadcrumbs}</a> },
-              { title: project?.name }
-            ]}
-            style={{ marginBottom: 24 }}
-          />
+          <div className="mb-8 flex flex-col gap-4">
+            <Breadcrumb
+              items={[
+                {
+                  title: (
+                    <Space className="cursor-pointer hover:text-blue-600 transition-colors" onClick={() => setSelectedProjectId(null)}>
+                      <ProjectOutlined />
+                      <span>{t.projects.breadcrumbs}</span>
+                    </Space>
+                  )
+                },
+                { title: <span className="font-semibold text-gray-800 px-2 py-0.5 bg-gray-100 rounded-md">{project?.name}</span> }
+              ]}
+            />
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 32 }}>
-            <div>
-              <Title level={2} style={{ marginBottom: 4 }}>{project?.name}</Title>
-              <Text type="secondary">{project?.description}</Text>
+            <div className="flex justify-between items-end">
+              <div>
+                <Title level={2} style={{ margin: 0 }}>{project?.name}</Title>
+                <Text type="secondary">{project?.description}</Text>
+              </div>
+              <Space>
+                <Button
+                  icon={<ArrowLeftOutlined />}
+                  onClick={() => setSelectedProjectId(null)}
+                >
+                  {t.common.back}
+                </Button>
+                <Button
+                  type="primary"
+                  icon={<PlusOutlined />}
+                  onClick={() => setIsFolderModalOpen(true)}
+                >
+                  {t.folders.newBtn}
+                </Button>
+              </Space>
             </div>
-            <Space>
-              <Button icon={<FolderAddOutlined />} size="large" onClick={() => setIsFolderModalOpen(true)}>{t.folders.newBtn}</Button>
-              <Popconfirm
-                title={t.projects.deleteTitle}
-                description={t.projects.deleteAllDesc}
-                onConfirm={() => handleDeleteProject(selectedProjectId)}
-                okText={t.projects.deleteAllBtn}
-                cancelText={t.common.no}
-                okButtonProps={{ danger: true }}
-              >
-                <Button danger icon={<DeleteOutlined />} size="large" />
-              </Popconfirm>
-            </Space>
           </div>
 
           <Row gutter={[24, 24]}>
             {projectFolders.map(f => (
-              <Col xs={12} sm={8} md={6} lg={4} key={f.id}>
+              <Col xs={24} sm={12} md={8} lg={6} key={f.id}>
                 <Card
                   hoverable
-                  className="folder-card"
-                  style={{ textAlign: 'center', borderRadius: 12, border: '1px solid #f0f0f0' }}
-                  styles={{ body: { padding: '24px 12px' } }}
+                  className="group overflow-hidden border-0 shadow-sm hover:shadow-xl transition-all duration-300"
+                  style={{ borderRadius: 16 }}
+                  styles={{ body: { padding: 0 } }}
                   onClick={() => setSelectedFolderName(f.name)}
                 >
-                  <FolderOpenOutlined style={{ fontSize: 48, color: '#FFC107', marginBottom: 16 }} />
-                  <br />
-                  <Text strong style={{ fontSize: 16 }}>{f.name}</Text>
-                  <div style={{ marginTop: 8 }}>
-                    <Text type="secondary" style={{ fontSize: 12 }}>
-                      {resources.filter(r => r.projectId === selectedProjectId && r.folderName === f.name).length} items
-                    </Text>
+                  <div className="h-2 bg-amber-400 group-hover:h-3 transition-all" />
+                  <div className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="p-3 bg-amber-50 rounded-2xl group-hover:bg-amber-100 transition-colors">
+                        <FolderOpenOutlined style={{ fontSize: 32, color: '#f59e0b' }} />
+                      </div>
+                      <Badge
+                        count={resources.filter(r => r.projectId === selectedProjectId && r.folderName === f.name).length}
+                        style={{ backgroundColor: '#f59e0b' }}
+                      />
+                    </div>
+                    <Title level={4} style={{ margin: '0 0 4px 0' }}>{f.name}</Title>
+                    <Text type="secondary" className="text-xs">{t.stats.resources}</Text>
+
+                    <div className="mt-6 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                      <Button type="link" className="p-0 text-amber-600 font-medium flex items-center gap-1">
+                        Open Module <ArrowRightOutlined style={{ fontSize: 12 }} />
+                      </Button>
+                    </div>
                   </div>
                 </Card>
               </Col>
@@ -946,45 +1040,76 @@ export default function App() {
     // 3. Root: Project List (unchanged)
     return (
       <div className="animate-in fade-in duration-500">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-          <Title level={2} style={{ margin: 0 }}>{t.projects.title}</Title>
-          <Button type="primary" icon={<PlusOutlined />} size="large" onClick={() => setIsProjectModalOpen(true)}>{t.projects.createButton}</Button>
+        <div className="mb-8 flex justify-between items-center">
+          <div>
+            <Title level={2} style={{ margin: 0 }}>{t.projects.title}</Title>
+            <Text type="secondary">{t.stats.projects}: {projects.length}</Text>
+          </div>
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            size="large"
+            className="shadow-md hover:shadow-lg transition-all"
+            onClick={() => setIsProjectModalOpen(true)}
+          >
+            {t.projects.createButton}
+          </Button>
         </div>
+
         <Table
           dataSource={projects}
           rowKey="id"
+          className="nexus-table border border-gray-100 rounded-xl overflow-hidden shadow-sm"
+          pagination={{ pageSize: 10, hideOnSinglePage: true }}
+          onRow={(record) => ({
+            onClick: () => setSelectedProjectId(record.id),
+            className: 'cursor-pointer hover:bg-blue-50/30 transition-colors'
+          })}
           columns={[
             {
               title: t.projects.columns.name,
-              dataIndex: 'name',
               key: 'name',
-              render: (text, record) => (
-                <a onClick={() => setSelectedProjectId(record.id)}>
-                  <Text strong style={{ fontSize: 16 }}>{text}</Text>
-                </a>
+              render: (_, record) => (
+                <Space size="middle">
+                  <div className="p-2.5 bg-blue-50 rounded-xl">
+                    <ProjectOutlined style={{ color: '#3b82f6', fontSize: 20 }} />
+                  </div>
+                  <div>
+                    <Text strong className="text-base block">{record.name}</Text>
+                    <Text type="secondary" className="text-xs line-clamp-1 max-w-[300px]">{record.description}</Text>
+                  </div>
+                </Space>
               ),
-            },
-            {
-              title: t.common.description,
-              dataIndex: 'description',
-              key: 'description',
-              ellipsis: true,
             },
             {
               title: t.projects.columns.manager,
               dataIndex: 'manager',
               key: 'manager',
-              render: (text) => <Space><UserOutlined /> {text}</Space>
+              width: 180,
+              render: (text) => (
+                <Space className="bg-gray-50 px-3 py-1 rounded-full border border-gray-100">
+                  <UserOutlined className="text-gray-400" />
+                  <Text className="text-sm">{text}</Text>
+                </Space>
+              )
             },
             {
               title: t.projects.columns.status,
               dataIndex: 'status',
               key: 'status',
-              render: (status) => <Tag color="green">{status.toUpperCase()}</Tag>
+              width: 120,
+              align: 'center',
+              render: (status) => (
+                <Tag color="cyan" className="rounded-full px-3 border-0 bg-cyan-50 text-cyan-700 font-medium">
+                  {status.toUpperCase()}
+                </Tag>
+              )
             },
             {
               title: t.common.action,
               key: 'action',
+              width: 80,
+              align: 'center',
               render: (_, p) => (
                 <Popconfirm
                   title={t.projects.deleteTitle}
@@ -993,11 +1118,13 @@ export default function App() {
                   onCancel={(e) => e?.stopPropagation()}
                   okText={t.common.yes}
                   cancelText={t.common.no}
+                  okButtonProps={{ danger: true }}
                 >
                   <Button
                     type="text"
                     danger
                     icon={<DeleteOutlined />}
+                    className="hover:bg-red-50"
                     onClick={(e) => e.stopPropagation()}
                   />
                 </Popconfirm>
@@ -1012,24 +1139,175 @@ export default function App() {
 
 
   const renderHistory = () => (
-    <Card title={t.claims.title} bordered={false}>
+    <div className="animate-in fade-in duration-500">
+      <div className="mb-8">
+        <Title level={2} style={{ margin: 0 }}>{t.claims.title}</Title>
+        <Text type="secondary">{t.stats.claims}: {claims.length}</Text>
+      </div>
+
       <Table
-        dataSource={claims.map(c => ({ ...c, key: c.id }))}
+        dataSource={claims.map(c => ({ ...c, key: c.id })).reverse()}
+        className="nexus-table border border-gray-100 rounded-xl overflow-hidden shadow-sm"
         columns={[
-          { title: t.claims.columns.engineer, dataIndex: 'borrowerName', key: 'name' },
           {
-            title: t.claims.columns.resource, key: 'res', render: (_, rec) => {
+            title: t.claims.columns.engineer,
+            dataIndex: 'borrowerName',
+            key: 'name',
+            render: (name) => (
+              <Space>
+                <UserOutlined className="text-gray-400" />
+                <Text strong>{name}</Text>
+              </Space>
+            )
+          },
+          {
+            title: t.claims.columns.resource,
+            key: 'res',
+            render: (_, rec) => {
               const res = resources.find(r => r.id === rec.resourceId);
-              return res ? res.name : <Text type="secondary" italic>{t.claims.columns.deleted}</Text>;
+              if (!res) return <Text type="secondary" italic>{t.claims.columns.deleted}</Text>;
+
+              const project = projects.find(p => p.id === res.projectId);
+
+              return (
+                <div className="flex flex-col">
+                  <Space size={4}>
+                    <FileTextOutlined className="text-blue-500 text-xs" />
+                    <Text className="text-sm font-medium">{res.name || res.fileName}</Text>
+                  </Space>
+                  <div className="flex items-center gap-1.5 mt-0.5">
+                    <Text type="secondary" className="text-[10px] uppercase font-bold tracking-wider opacity-60">
+                      {project?.name || 'Unknown Project'}
+                    </Text>
+                    <span className="text-gray-300 text-[10px]">/</span>
+                    <Text type="secondary" className="text-[10px] truncate max-w-[120px]">
+                      {res.fileName}
+                    </Text>
+                  </div>
+                </div>
+              );
             }
           },
-          { title: t.claims.columns.date, dataIndex: 'claimDate', key: 'date' },
-          { title: t.claims.columns.reason, dataIndex: 'purpose', key: 'purpose', ellipsis: true },
-          { title: t.claims.columns.status, key: 's', render: () => <Tag color="success">{t.claims.columns.downloaded}</Tag> }
+          {
+            title: t.claims.columns.date,
+            dataIndex: 'claimDate',
+            key: 'date',
+            width: 140,
+            render: (date) => <Text type="secondary" className="text-xs">{date}</Text>
+          },
+          {
+            title: t.claims.columns.reason,
+            dataIndex: 'purpose',
+            key: 'purpose',
+            ellipsis: true,
+            render: (text) => <Text type="secondary" className="text-sm">{text || t.common.optional}</Text>
+          },
+          {
+            title: t.claims.columns.status,
+            key: 's',
+            width: 100,
+            align: 'center',
+            render: () => (
+              <Tag color="success" className="m-0 border-0 bg-emerald-50 text-emerald-600 font-bold rounded-full px-3 text-[10px]">
+                {t.claims.columns.downloaded}
+              </Tag>
+            )
+          }
         ]}
       />
-    </Card>
+    </div>
   );
+
+  if (isStandaloneShare) {
+    return (
+      <ConfigProvider theme={{ token: { colorPrimary: '#1677ff', borderRadius: 12 } }} locale={lang === 'zh' ? zhCN : enUS}>
+        <Layout style={{ minHeight: '100vh', background: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+          <Content style={{ maxWidth: 500, width: '100%' }}>
+            <Card
+              bordered={false}
+              className="shadow-2xl overflow-hidden"
+              style={{ borderRadius: 24 }}
+              styles={{ body: { padding: '40px' } }}
+            >
+              {claimSuccess ? (
+                <div style={{ textAlign: 'center', padding: '20px 0' }}>
+                  <div className="inline-flex p-6 bg-emerald-50 rounded-full mb-6">
+                    <CheckCircleOutlined style={{ fontSize: 48, color: '#10b981' }} />
+                  </div>
+                  <Title level={2}>{t.claims.modals.success}</Title>
+                  <Paragraph type="secondary" className="mb-8">
+                    {lang === 'zh' ? '文件传输已发起，请检查您的下载列表。' : 'File transfer initiated. Please check your downloads.'}
+                  </Paragraph>
+                  <div className="bg-slate-50 p-4 rounded-xl text-xs text-gray-500 border border-dashed">
+                    {lang === 'zh' ? '该链接已完成领用。如需重新下载，请刷新页面或联系管理员。' : 'Claim completed. Refresh or contact admin for re-download.'}
+                  </div>
+                </div>
+              ) : selectedResource ? (
+                <>
+                  <div style={{ textAlign: 'center', marginBottom: 32 }}>
+                    <div className="inline-flex p-4 bg-blue-50 rounded-2xl mb-4">
+                      <DownloadOutlined style={{ fontSize: 32, color: '#1677ff' }} />
+                    </div>
+                    <Title level={3} style={{ margin: '0 0 8px 0' }}>{t.claims.modals.title}</Title>
+                    <Text type="secondary">{t.claims.modals.warn}</Text>
+                  </div>
+
+                  <div className="bg-slate-50 p-6 rounded-2xl mb-8 border border-slate-100/50">
+                    <Space direction="vertical" size={4} style={{ width: '100%' }}>
+                      <div className="flex justify-between items-center">
+                        <Text strong className="text-lg">{selectedResource.name || selectedResource.fileName}</Text>
+                        <Tag color="blue" className="m-0 border-0 bg-blue-100 text-blue-700 px-3 py-0.5 rounded-full">{selectedResource.type}</Tag>
+                      </div>
+                      <Text type="secondary" className="flex items-center gap-2">
+                        <FileTextOutlined className="text-gray-400" />
+                        {selectedResource.fileName}
+                      </Text>
+                    </Space>
+                  </div>
+
+                  <Form form={claimForm} layout="vertical" onFinish={async (v) => {
+                    await handleClaimSubmit(v);
+                    // After successful claim and download, we can show a success state or just stay here.
+                    // The handleClaimSubmit already shows success and resets field.
+                  }}>
+                    <Form.Item name="borrowerName" label={t.claims.modals.nameLabel} rules={[{ required: true }]}>
+                      <Input size="large" prefix={<UserOutlined className="text-gray-400" />} placeholder={t.claims.modals.namePlace} className="rounded-xl" />
+                    </Form.Item>
+                    <Form.Item name="borrowerDept" label={t.claims.modals.deptLabel}>
+                      <Input size="large" prefix={<ProjectOutlined className="text-gray-400" />} placeholder={t.common.optional} className="rounded-xl" />
+                    </Form.Item>
+                    <Form.Item name="purpose" label={t.claims.modals.purposeLabel}>
+                      <Input.TextArea rows={3} placeholder={t.common.optional} className="rounded-xl" />
+                    </Form.Item>
+
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      block
+                      size="large"
+                      icon={<DownloadOutlined />}
+                      className="h-14 bg-gradient-to-r from-blue-600 to-indigo-600 border-0 shadow-lg shadow-blue-200 hover:shadow-xl transition-all rounded-xl mt-4 font-bold"
+                    >
+                      {t.claims.modals.submit}
+                    </Button>
+                  </Form>
+                </>
+              ) : (
+                <Empty description={t.ai.noAnswer} />
+              )}
+            </Card>
+
+            <div className="mt-8 text-center text-gray-400 text-xs">
+              <Space>
+                <SolutionOutlined />
+                <span>{t.appTitle} Secure File Transfer • Enterprise Grade Security</span>
+              </Space>
+            </div>
+          </Content>
+        </Layout>
+      </ConfigProvider>
+    );
+  }
 
   return (
     <ConfigProvider theme={{ token: { colorPrimary: '#1677ff', borderRadius: 6 } }} locale={lang === 'zh' ? zhCN : enUS}>

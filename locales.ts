@@ -4,7 +4,7 @@ export const translations = {
         appTitle: "Nexus Ops",
         menu: {
             dashboard: "Dashboard",
-            projects: "Environments",
+            projects: "Projects",
             history: "Logs"
         },
         common: {
@@ -20,65 +20,67 @@ export const translations = {
             upload: "Upload",
             create: "Create",
             edit: "Edit",
-            optional: "Optional"
+            share: "Share",
+            optional: "Optional",
+            back: "Back"
         },
         stats: {
-            projects: "Managed Projects",
-            resources: "Total Config Files",
+            projects: "Total Projects",
+            resources: "Config Files",
             claims: "Downloads Logged"
         },
         ai: {
             title: "Quick Access Finder",
-            desc: "Locate environment configs by searching tags, filenames, or projects.",
-            placeholder: "Search resources...",
+            desc: "Locate mission-critical configs by searching tags, filenames, or project names.",
+            placeholder: "Search anything...",
             button: "Find Now",
             unavailable: "Search is initializing...",
             noAnswer: "No matching resources found.",
             responseResult: "Search Results"
         },
         projects: {
-            title: "Environments Directory",
-            createButton: "Create Environment",
-            breadcrumbs: "Projects",
+            title: "Project Repository",
+            createButton: "New Project",
+            breadcrumbs: "Root",
             deleteTitle: "Delete Project",
             deleteDesc: "Delete this project?",
             deleteAllDesc: "This will permanently delete the project and all contents. Continue?",
             deleteAllBtn: "Delete All",
-            emptyState: "This project is empty.",
+            emptyState: "This project has no content.",
             createFirstFolder: "Create First Folder",
             columns: {
                 name: "Project Name",
-                manager: "Manager",
+                manager: "Lead",
                 status: "Status"
             },
             modals: {
-                createTitle: "Create New Environment Project",
-                nameLabel: "Environment Name",
-                namePlace: "e.g. AWS Production Cluster",
-                managerLabel: "Owner/Manager",
-                managerPlace: "Zhang Wei",
-                descLabel: "Environment Description",
-                descPlace: "Region, purpose, and key services...",
-                submit: "Create Environment",
+                createTitle: "Create Project",
+                nameLabel: "Project Name",
+                namePlace: "e.g. Production Cluster X",
+                managerLabel: "Project Lead",
+                managerPlace: "John Doe",
+                descLabel: "Project Scope",
+                descPlace: "Project objectives and key environment details...",
+                submit: "Initialize Project",
                 success: "Project created successfully",
                 deleteSuccess: "Project and all its contents deleted"
             }
         },
         folders: {
-            newBtn: "New Folder",
-            uploadBtn: "Upload File Here",
-            deleteTitle: "Delete Folder",
+            newBtn: "Add Module",
+            uploadBtn: "Upload File",
+            deleteTitle: "Delete Module",
             deleteDesc: "Delete \"{name}\" and all its contents?",
-            deleteBtn: "Delete Folder",
-            emptyResource: "No files in this folder. Upload one to get started.",
+            deleteBtn: "Remove Module",
+            emptyResource: "No files found. Let's upload some.",
             modals: {
-                createTitle: "Add New Folder",
-                nameLabel: "Folder Name",
-                namePlace: "e.g. VPN_Configurations",
-                submit: "Create Folder",
-                success: "Folder \"{name}\" created"
+                createTitle: "Add New Module Folder",
+                nameLabel: "Module Name",
+                namePlace: "e.g. VPN_Node_Alpha",
+                submit: "Add Module",
+                success: "Module \"{name}\" created"
             },
-            deleteSuccess: "Folder \"{name}\" and its resources deleted"
+            deleteSuccess: "Module \"{name}\" removed"
         },
         resources: {
             columns: {
@@ -86,54 +88,54 @@ export const translations = {
                 type: "Type",
                 fileName: "File Name",
                 stock: "Stock",
-                claimants: "Claimants"
+                claimants: "History"
             },
-            deleteTitle: "Delete File",
+            deleteTitle: "Delete Artifact",
             deleteDesc: "Are you sure you want to delete this resource?",
-            deleteSuccess: "Resource deleted successfully",
+            deleteSuccess: "Resource deleted",
             modals: {
-                uploadTitle: "Upload Resource File",
-                fileLabel: "Upload File",
-                dragText: "Click or drag config file to this area to upload",
+                uploadTitle: "Upload Resource Artifact",
+                fileLabel: "Select Artifact",
+                dragText: "Drop resource artifacts here",
                 dragHint: "Support for .ovpn, .xml, .yaml, .json, .crt, .key files",
-                folderLabel: "Target Folder",
-                folderPlace: "Select folder...",
+                folderLabel: "Module Folder",
+                folderPlace: "Select module...",
                 nameLabel: "Resource Tag",
-                namePlace: "e.g., Production Admin VPN",
+                namePlace: "e.g., Admin Gateway Config",
                 typeLabel: "Resource Type",
-                qtyLabel: "Availability",
-                limitLabel: "Access Limit",
+                qtyLabel: "Limit Availability",
+                limitLabel: "Usage Limit",
                 limitTooltip: "0 = Unlimited downloads",
-                techDescLabel: "Technical Description",
-                techDescPlace: "Optional notes for other engineers...",
-                submit: "Publish & Upload Resource",
-                errorNoFile: "Please select at least one file to upload.",
-                success: "Resource \"{name}\" uploaded successfully",
-                editTitle: "Edit Resource Properties",
-                editSuccess: "Resource updated successfully"
+                techDescLabel: "Operation Notes",
+                techDescPlace: "Deployment notes or SOP details...",
+                submit: "Publish Resource",
+                errorNoFile: "Please select at least one file.",
+                success: "Artifact \"{name}\" published",
+                editTitle: "Edit Artifact Properties",
+                editSuccess: "Resource updated"
             }
         },
         claims: {
-            title: "Configuration Access Logs",
+            title: "Access Audit Logs",
             columns: {
-                engineer: "Engineer",
-                resource: "Resource",
-                date: "Date",
-                reason: "Reason",
+                engineer: "Operated By",
+                resource: "Artifact",
+                date: "Timestamp",
+                reason: "Context",
                 status: "Status",
-                deleted: "(Deleted Resource)",
-                downloaded: "DOWNLOADED"
+                deleted: "(N/A)",
+                downloaded: "SUCCESS"
             },
             modals: {
-                title: "Access Request Details",
-                nameLabel: "Engineer Name",
-                namePlace: "e.g. Li Ming",
-                deptLabel: "Department / Team",
-                purposeLabel: "Purpose for Download",
-                warn: "This action will be logged in the system audit history. Please ensure compliance with security policies.",
-                submit: "Log Access & Download File",
-                errorLimit: "Download limit reached! You have already downloaded this configuration.",
-                success: "Configuration downloaded and access logged."
+                title: "Authentication & Authorization",
+                nameLabel: "Operator ID",
+                namePlace: "e.g. JDoe",
+                deptLabel: "Security Group / Team",
+                purposeLabel: "Operation Purpose",
+                warn: "Security Audit Active. This operation is being monitored.",
+                submit: "Authorize & Download",
+                errorLimit: "Threshold reached! Security policy prohibits further downloads.",
+                success: "Access granted. File is being transferred."
             }
         },
         types: {
@@ -141,15 +143,15 @@ export const translations = {
             cert: 'Certificate',
             key: 'Access Key',
             doc: 'Documentation',
-            sample: 'Data Sample'
+            sample: 'Dataset'
         }
     },
     zh: {
         appTitle: "Nexus Ops",
         menu: {
             dashboard: "仪表盘",
-            projects: "环境列表",
-            history: "操作日志"
+            projects: "项目列表",
+            history: "审计日志"
         },
         common: {
             yes: "确认",
@@ -159,133 +161,140 @@ export const translations = {
             action: "操作",
             description: "描述",
             status: "状态",
-            search: "搜索",
+            search: "全域搜索",
             download: "下载",
             upload: "上传",
-            create: "创建",
+            create: "新建",
             edit: "编辑",
-            optional: "选填"
+            share: "分享",
+            optional: "选填",
+            back: "返回"
         },
         stats: {
-            projects: "管理项目数",
-            resources: "配置文件总数",
-            claims: "累计下载次数"
+            projects: "托管项目总数",
+            resources: "配置资源总数",
+            claims: "合规申领次数"
         },
         ai: {
             title: "资源快速访达",
-            desc: "输入资源标签、文件名或项目名称，快速定位并跳转到目标位置。",
-            placeholder: "输入关键词搜索...",
-            button: "立即查找",
-            unavailable: "搜索系统正在初始化...",
-            noAnswer: "未找到匹配的资源或项目。",
-            responseResult: "搜索结果"
+            desc: "输入资源标签、文件名或项目代号，全域检索并一键触达核心配置。",
+            placeholder: "搜索任意资源、项目、文件...",
+            button: "立即检索",
+            unavailable: "搜索引擎就绪中...",
+            noAnswer: "未找到相关资源，请尝试其他关键词。",
+            responseResult: "检索结果"
         },
         projects: {
-            title: "环境目录",
-            createButton: "创建新环境",
-            breadcrumbs: "项目列表",
-            deleteTitle: "删除项目",
-            deleteDesc: "确认删除此项目？",
-            deleteAllDesc: "此操作将永久删除该项目及其所有内容。是否继续？",
-            deleteAllBtn: "全部删除",
-            emptyState: "此项目为空。",
-            createFirstFolder: "创建第一个文件夹",
+            title: "项目仓库",
+            createButton: "新建项目",
+            breadcrumbs: "根目录",
+            deleteTitle: "解散项目",
+            deleteDesc: "确认解散此项目？",
+            deleteAllDesc: "此操作将永久抹除项目及其所有关联资源，操作不可逆。是否继续？",
+            deleteAllBtn: "彻底删除",
+            emptyState: "该项目暂未划定模块区域。",
+            createFirstFolder: "创建首个模块",
             columns: {
-                name: "项目名称",
-                manager: "负责人",
+                name: "项目代号/名称",
+                manager: "责任人",
                 status: "状态"
             },
             modals: {
-                createTitle: "创建新环境项目",
-                nameLabel: "环境名称",
-                namePlace: "例如：AWS 生产集群",
-                managerLabel: "负责人/管理员",
-                managerPlace: "张伟",
-                descLabel: "环境描述",
-                descPlace: "区域、用途及关键服务...",
-                submit: "创建环境",
-                success: "项目创建成功",
-                deleteSuccess: "项目及其所有内容已删除"
+                createTitle: "初始化新项目",
+                nameLabel: "项目名称",
+                namePlace: "例如：生产环境核心集群",
+                managerLabel: "主负责人",
+                managerPlace: "姓名或工号",
+                descLabel: "项目背景/描述",
+                descPlace: "描述项目的核心职责、所属地域及业务优先级...",
+                submit: "初始化项目",
+                success: "项目初始化成功",
+                deleteSuccess: "项目及关联实体已全部清理"
             }
         },
         folders: {
-            newBtn: "新建文件夹",
-            uploadBtn: "上传文件",
-            deleteTitle: "删除文件夹",
-            deleteDesc: "删除 \"{name}\" 及其所有内容？",
-            deleteBtn: "删除文件夹",
-            emptyResource: "此文件夹暂无文件。上传一个文件以开始。",
+            newBtn: "添加模块",
+            uploadBtn: "上传至此模块",
+            deleteTitle: "移除模块",
+            deleteDesc: "将移除模块 \"{name}\" 及其包含的所有资源实体。确认？",
+            deleteBtn: "确认移除",
+            emptyResource: "该模块尚未入库任何配置。点击按钮上传。",
             modals: {
-                createTitle: "添加新文件夹",
-                nameLabel: "文件夹名称",
-                namePlace: "例如：VPN_配置",
-                submit: "创建文件夹",
-                success: "文件夹 \"{name}\" 已创建"
+                createTitle: "定义新功能模块",
+                nameLabel: "模块标识",
+                namePlace: "例如：VPN_核心节点",
+                submit: "确认添加",
+                success: "模块 \"{name}\" 已就绪"
             },
-            deleteSuccess: "文件夹 \"{name}\" 及其资源已删除"
+            deleteSuccess: "模块 \"{name}\" 已从项目中移除"
         },
         resources: {
             columns: {
                 name: "资源标签",
-                type: "类型",
-                fileName: "文件名",
-                stock: "库存",
-                claimants: "申领人"
+                type: "资源类型",
+                fileName: "物理文件名",
+                stock: "分发配额",
+                claimants: "审计快照"
             },
-            deleteTitle: "删除文件",
-            deleteDesc: "确定要删除此资源吗？",
-            deleteSuccess: "资源删除成功",
+            deleteTitle: "下线资源",
+            deleteDesc: "确定要从系统中抹除此资源实体吗？",
+            deleteSuccess: "资源下线成功",
             modals: {
-                uploadTitle: "上传资源文件",
-                fileLabel: "上传文件",
-                dragText: "点击或拖拽配置文件到此处上传",
-                dragHint: "支持 .ovpn, .xml, .yaml, .json, .crt, .key 等格式文件",
-                folderLabel: "目标文件夹",
-                folderPlace: "选择文件夹...",
-                nameLabel: "资源标签",
-                namePlace: "例如：生产环境 Admin VPN",
+                uploadTitle: "资源实体入库",
+                fileLabel: "选择物理文件",
+                dragText: "拖拽实体至此进行高可靠上传",
+                dragHint: "兼容 .ovpn, .xml, .yaml, .json, .crt, .key 等运维核心格式",
+                folderLabel: "归属模块",
+                folderPlace: "指派所属的功能模块...",
+                nameLabel: "业务标签",
+                namePlace: "例如：网关核心认证配置",
                 typeLabel: "资源类型",
-                qtyLabel: "可用数量",
-                limitLabel: "访问限制",
-                limitTooltip: "0 = 无限下载",
-                techDescLabel: "技术描述",
-                techDescPlace: "给其他工程师的备注（选填）...",
-                submit: "发布并上传资源",
-                errorNoFile: "请至少选择一个要上传的文件。",
-                success: "资源 \"{name}\" 上传成功",
-                editTitle: "编辑资源属性",
-                editSuccess: "资源属性更新成功"
+                qtyLabel: "单次配额",
+                limitLabel: "每人限领",
+                limitTooltip: "0 表示不限制个人领用次数",
+                techDescLabel: "运维审计备注",
+                techDescPlace: "备注实体的具体版本、用途、或 SRE 特殊说明...",
+                submit: "确认发布",
+                errorNoFile: "请先指定需要入库的物理文件。",
+                success: "实体 \"{name}\" 已正式发布",
+                editTitle: "修正资源属性",
+                editSuccess: "资源属性已更新"
             }
         },
         claims: {
-            title: "配置访问日志",
+            title: "安全审计与领用志",
             columns: {
-                engineer: "工程师",
-                resource: "资源",
-                date: "日期",
-                reason: "用途",
-                status: "状态",
-                deleted: "(已删除资源)",
-                downloaded: "已下载"
+                engineer: "操作员",
+                resource: "关联资源",
+                date: "审计时间",
+                reason: "操作上下文",
+                status: "执行状态",
+                deleted: "(资源已清理)",
+                downloaded: "下载成功"
             },
             modals: {
-                title: "访问请求详情",
-                nameLabel: "工程师姓名",
-                namePlace: "例如：李明",
-                deptLabel: "部门 / 团队",
-                purposeLabel: "下载用途",
-                warn: "此操作将记录在系统审计历史中。请确保符合信息安全政策。",
-                submit: "记录访问并下载文件",
-                errorLimit: "达到下载限制！您已经下载过此配置。",
-                success: "配置下载成功并已记录日志。"
+                title: "身份鉴权与安全审计",
+                nameLabel: "操作员标识",
+                namePlace: "姓名、账号或工号",
+                deptLabel: "归属组织/团队",
+                purposeLabel: "申领正当理由",
+                warn: "安全提醒：该操作受实时审计监控。非法外泄配置将触发安全溯源。",
+                submit: "授权并执行下载",
+                errorLimit: "已触发安全策略限制！该操作员已超出此资源的领用上限。",
+                success: "鉴权通过，文件传输任务已发起。"
             }
+        },
+        projects_enhanced: {
+            view: "视图切换",
+            grid: "卡片网格",
+            list: "列表视图"
         },
         types: {
             config: '配置文件',
-            cert: '证书文件',
-            key: '访问密钥',
-            doc: '技术文档',
-            sample: '样本数据'
+            cert: '证书/凭证',
+            key: '私钥/密钥',
+            doc: '运维文档',
+            sample: '数据样例'
         }
     }
 };
