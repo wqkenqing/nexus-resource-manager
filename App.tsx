@@ -491,13 +491,16 @@ export default function App() {
   }, [lang]);
 
   const handleExportData = useCallback(async () => {
+    // Strip heavy fileContent from metadata as physical files are managed separately
+    const cleanedResources = resources.map(({ fileContent, ...rest }) => rest);
+
     const allData = {
       projects,
       folders,
-      resources,
+      resources: cleanedResources,
       claims,
       exportDate: new Date().toISOString(),
-      version: "1.0"
+      version: "1.1"
     };
     const blob = new Blob([JSON.stringify(allData, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -508,7 +511,7 @@ export default function App() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    message.success(lang === 'zh' ? '元数据导出成功' : 'Metadata exported successfully');
+    message.success(lang === 'zh' ? '元数据导出成功 (已过滤物理内容)' : 'Metadata exported (filtered file content)');
   }, [projects, folders, resources, claims, t, lang]);
 
   const handleImportData = useCallback(async (info: any) => {
